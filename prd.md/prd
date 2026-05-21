@@ -1,0 +1,194 @@
+# Cute Notes — Product Requirements Document
+*v0.1 · May 2026*
+
+---
+
+# Overview
+
+Cute Notes is a web app for sending beautifully designed, animated little notes to people you love — the kind of warmth that iMessage can't touch. Think snail mail aesthetics, Animal Crossing coziness, and Partiful-level animation delight, all delivered as a URL.
+
+**One-liner:**  
+Write a note. Pick a vibe. Send a moment.
+
+---
+
+# Problem
+
+Saying "I miss you" over iMessage feels flat. The medium erases the feeling. There's no equivalent of a handwritten card on cute stationery — something with personality, texture, and care — that's also instant and digital-native.
+
+---
+
+# Target User
+
+### Primary
+Lindsay (and people like her) — someone in a long-distance or close relationship who communicates affection with personality and aesthetic intent. Likely 20–30s, design-aware, values whimsy and emotional nuance.
+
+### Receiver
+Anyone with a link — no account needed.
+
+---
+
+# Core User Flow
+
+| Sender | Receiver |
+|---|---|
+| 1. Open Cute Notes (web) | |
+| 2. Choose a card style | |
+| 3. Write note content | |
+| • Optional salutation | |
+| • Note body | |
+| • Optional valediction | |
+| 4. Pick an animation effect | |
+| 5. Preview | |
+| 6. Send → get a shareable URL | |
+| | 7. See sealed envelope |
+| | 8. Tap to open → envelope animates open |
+| | 9. Card is revealed with animations playing |
+
+---
+
+# Features
+
+## 1. Card Composer
+
+| Element | Details |
+|---|---|
+| Salutation | Optional freeform text field. Placeholder: `"dear my little duck prince,"` |
+| Note body | Short-form text. Suggested max ~150 chars to preserve the card feel. |
+| Valediction | Optional freeform. Placeholder: `"– your little ketchup packet"` |
+
+All text fields should feel like writing on stationery — appropriate fonts per card style, no sterile input boxes.
+
+---
+
+## 2. Card Styles
+
+A curated set of card themes. Each has its own:
+
+- Background (color, texture, pattern)
+- Border/frame treatment
+- Font pairing
+- Default particle animation
+
+### Initial Set of 6 Styles
+
+| Style Name | Vibe | Colors | Fonts | Default Animation |
+|---|---|---|---|---|
+| Grid Garden | Sweet, pastel, stationery | Mint, soft blue, gold | Itim + Jersey 15 | Stars |
+| Duck Pond | Quirky, illustrative, bold | Cobalt blue, white | Kurale + Itim | Confetti |
+| Sakura Cloud | Romantic, soft, airy | Blush, sage, white | Kurale + serif | Cherry blossoms |
+| Starfire | Dreamy, dark, celestial | Midnight, rose gold, cream | Jersey 15 + thin serif | Falling stars |
+| Cottagecore | Warm, earthy, whimsical | Warm cream, rust, sage | Itim + handwritten | Leaves |
+| Y2K Candy | Bold, chaotic, fun | Hot pink, lime, sky | Jersey 15 + bold display | Rainbow confetti |
+
+Each card style ships with a default decorative illustration or motif (e.g. ducks, cats, flowers, stars) placed decoratively — not user-controlled, just part of the charm.
+
+---
+
+## 3. Animation Effects (Particles)
+
+Sender picks one overlay animation that plays when the card is open:
+
+- ❄️ Snow
+- ⭐ Stars (twinkling)
+- 🌸 Cherry blossoms
+- 🎊 Rainbow confetti
+- 🔥 Fireflies (soft, not intense fire)
+- 🍃 Floating leaves
+- 💫 Sparkles
+- 🫧 Bubbles
+
+Animations should feel like Partiful — ambient, looping, delightful. Not in-your-face.
+
+---
+
+## 4. Preview Mode
+
+Before sending, sender sees a real-time preview of:
+
+- The card with their text
+- The animation playing
+- How it'll look on mobile (since receiver likely opens on phone)
+
+---
+
+## 5. Envelope Experience (Receiver View)
+
+This is the magic moment — the thing that makes it feel like mail.
+
+### Receiver Flow
+
+1. Receiver opens the link → sees a sealed envelope (styled to match the card vibe)
+2. A small prompt appears: `"You've got a note 💌"`
+3. Tap/click → envelope opens with a satisfying animation (flap lifts, card slides out)
+4. Card is revealed with its particle animation playing
+5. Card is static (no editing, no reply flow in v1)
+
+The envelope should match the card style's color palette.
+
+---
+
+## 6. Sharing
+
+- Sending generates a unique URL (e.g. `CuteNotes.app/n/abc123`)
+- Sender can copy link or share directly via iMessage, Instagram DMs, etc.
+- No login required for either party in v1
+
+---
+
+# Out of Scope (v1)
+
+- User accounts / note history
+- Two-way replies
+- Custom illustrations or image uploads
+- Push/SMS/email delivery (link sharing only)
+- Mobile app (web-first)
+- Audio or sound effects
+
+---
+
+# Design Principles
+
+### The card is the product
+Every design decision should serve the emotional impact of the card itself — not UI chrome.
+
+### Whimsy has craft
+Cute doesn't mean sloppy. Animations should feel considered, not chaotic.
+
+### Speed of delight
+Sender should be able to go from open to sent in under 2 minutes.
+
+### Receiver-first magic
+The envelope reveal is the hero moment. Invest in it.
+
+---
+
+# Success Metrics (v1)
+
+| Metric | Goal |
+|---|---|
+| Time to send (first note) | < 2 min |
+| Envelope open rate | > 80% of links opened |
+| Card styles used | Distribution across ≥ 3 styles |
+| Qualitative | “This is so cute” reactions from receivers |
+
+---
+
+# Open Questions
+
+- **Expiration:** Should notes expire, or live forever? Forever feels more special but has cost implications.
+- **Font loading:** Web fonts add latency — how do we make the composer feel instant?
+- **Animation performance:** Particle effects on low-end phones — need a graceful fallback.
+- **Reply hook:** Even in v1, should there be a subtle “send one back?” CTA to grow organically?
+
+---
+
+# Appendix: Font Candidates
+
+| Font | Feel | Use |
+|---|---|---|
+| Jersey 15 | Retro pixel, playful | Display / card body |
+| Itim | Handwritten, soft | Salutation / valediction |
+| Kurale | Elegant serif with warmth | Romantic styles |
+| Gaegu | Korean-influenced, loose | Quirky styles |
+| Single Day | Casual handwritten | Body text alternate |

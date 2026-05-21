@@ -1,0 +1,137 @@
+.envelope-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 2rem 1.25rem;
+}
+
+.envelope {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.envelope__prompt {
+  font-family: 'Itim', cursive;
+  font-size: 1.25rem;
+  color: #5c4a5a;
+  margin: 0;
+  animation: gentle-bob 3s ease-in-out infinite;
+}
+
+.envelope__hint {
+  font-family: 'Itim', cursive;
+  font-size: 0.85rem;
+  color: #9a8a98;
+  letter-spacing: 0.04em;
+}
+
+.envelope__body {
+  position: relative;
+  width: 260px;
+  height: 168px;
+}
+
+.envelope__pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 130px;
+  background: var(--env-inner);
+  border-radius: 0 0 6px 6px;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.14);
+}
+
+.envelope__pocket::before,
+.envelope__pocket::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.envelope__pocket::before {
+  left: 0;
+  border-width: 65px 0 0 130px;
+  border-color: var(--env-outer) transparent transparent transparent;
+}
+
+.envelope__pocket::after {
+  right: 0;
+  border-width: 65px 130px 0 0;
+  border-color: transparent var(--env-outer) transparent transparent;
+}
+
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--env-flap);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top center;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.envelope__seal {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--env-seal);
+  color: var(--env-seal-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.envelope:hover .envelope__seal {
+  transform: translateX(-50%) scale(1.06);
+}
+
+.envelope-reveal {
+  animation: card-emerge 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes gentle-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes card-emerge {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

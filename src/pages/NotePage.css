@@ -1,0 +1,53 @@
+.note-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #fdf6f8 0%, #f0e8f4 100%);
+}
+
+.note-page--error {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.note-page__error-msg {
+  font-family: 'Itim', cursive;
+  font-size: 1.5rem;
+  color: #5c4458;
+  margin: 0 0 0.5rem;
+}
+
+.note-page__error-hint {
+  color: #9a8898;
+  margin: 0 0 1.5rem;
+}
+
+.note-page__home-link {
+  font-family: 'Itim', cursive;
+  color: #c87898;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.note-page__home-link:hover {
+  text-decoration: underline;
+}
+
+.note-page__footer {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.note-page__brand {
+  font-family: 'Itim', cursive;
+  color: #b8a8b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.note-page__brand:hover {
+  color: #9a8898;
+}

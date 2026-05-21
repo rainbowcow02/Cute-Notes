@@ -1,0 +1,99 @@
+.note-card {
+  position: relative;
+  width: min(100%, 320px);
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 0 var(--card-border),
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 3px var(--card-border);
+  background: var(--card-bg-layer);
+}
+
+.note-card--pattern {
+  background-size: 18px 18px;
+}
+
+.note-card--compact {
+  width: min(100%, 280px);
+}
+
+.note-card__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.note-card__motif {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.35;
+  z-index: 1;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.note-card__motif--tl {
+  top: 12px;
+  left: 14px;
+}
+
+.note-card__motif--br {
+  bottom: 14px;
+  right: 14px;
+  font-size: 1.25rem;
+}
+
+.note-card__inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem 1.75rem 1.75rem;
+  color: var(--card-ink);
+  text-align: center;
+}
+
+.note-card__salutation {
+  font-family: var(--font-salutation), cursive;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0 0 1rem;
+  color: var(--card-text-muted);
+  text-align: left;
+}
+
+.note-card__body {
+  font-family: var(--font-body), serif;
+  font-size: 1.35rem;
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--card-ink);
+  word-break: break-word;
+}
+
+.note-card--compact .note-card__body {
+  font-size: 1.15rem;
+}
+
+.note-card__placeholder {
+  opacity: 0.45;
+  font-style: italic;
+}
+
+.note-card__valediction {
+  font-family: var(--font-valediction), cursive;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 1rem 0 0;
+  color: var(--card-text-muted);
+  text-align: right;
+}

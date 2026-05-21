@@ -1,0 +1,336 @@
+.composer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #fdf6f8 0%, #f5ebe8 40%, #ede4f0 100%);
+}
+
+.composer__header {
+  text-align: center;
+  padding: 2.5rem 1.5rem 1rem;
+}
+
+.composer__logo {
+  font-family: 'Itim', cursive;
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: #4a3040;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.composer__tagline {
+  font-family: 'Kurale', serif;
+  font-size: 1rem;
+  color: #8a6878;
+  margin: 0.35rem 0 0;
+}
+
+.composer__main {
+  flex: 1;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+.composer__section {
+  margin-bottom: 2rem;
+}
+
+.composer__section-title {
+  font-family: 'Itim', cursive;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #5c4458;
+  margin: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.composer__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #e8c0d0;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.style-picker {
+  display: flex;
+  gap: 0.65rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.style-picker__item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 88px;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--swatch-bg, var(--swatch-layer));
+  background-image: var(--swatch-layer);
+  background-size: 14px 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: inset 0 0 0 2px var(--swatch-border);
+}
+
+.style-picker__item--active {
+  border-color: #c87898;
+  transform: scale(1.04);
+  box-shadow:
+    inset 0 0 0 2px var(--swatch-border),
+    0 4px 16px rgba(200, 120, 152, 0.35);
+}
+
+.style-picker__motif {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.style-picker__name {
+  font-family: 'Itim', cursive;
+  font-size: 0.7rem;
+  color: #4a3040;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.animation-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 380px) {
+  .animation-picker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.animation-picker__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.6rem 0.35rem;
+  border: 1.5px solid #e8d8e4;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.animation-picker__item--active {
+  border-color: #d888a8;
+  background: #fff;
+  transform: scale(1.03);
+}
+
+.animation-picker__emoji {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.animation-picker__label {
+  font-size: 0.65rem;
+  color: #7a6878;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.stationery-pad {
+  position: relative;
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem 1.25rem;
+  background: var(--pad-layer);
+  box-shadow:
+    inset 0 0 0 3px var(--pad-border),
+    0 8px 28px rgba(0, 0, 0, 0.08);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stationery-pad--pattern {
+  background-size: 18px 18px;
+}
+
+.stationery-pad__motif {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 1.25rem;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.stationery-field {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stationery-field--body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.stationery-field__input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  resize: none;
+  color: var(--pad-text);
+}
+
+.stationery-field__input::placeholder {
+  color: var(--pad-muted);
+  opacity: 0.65;
+}
+
+.stationery-field__input--salutation {
+  font-family: var(--font-salutation), cursive;
+  font-size: 1rem;
+  padding: 0.25rem 0;
+  text-align: left;
+}
+
+.stationery-field__input--body {
+  font-family: var(--font-body), serif;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  padding: 1rem 0;
+  text-align: center;
+  flex: 1;
+}
+
+.stationery-field__input--valediction {
+  font-family: var(--font-valediction), cursive;
+  font-size: 0.95rem;
+  padding: 0.5rem 0 0;
+  text-align: right;
+}
+
+.stationery-field__count {
+  align-self: flex-end;
+  font-size: 0.7rem;
+  color: var(--pad-muted);
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+.composer__section--preview-mini .composer__card-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.composer__footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+  background: rgba(253, 246, 248, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(232, 200, 216, 0.5);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.composer__btn {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  font-family: 'Itim', cursive;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.composer__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.composer__btn--secondary {
+  background: transparent;
+  border: 1.5px solid #d8b8c8;
+  color: #6a5060;
+}
+
+.composer__btn--primary {
+  background: linear-gradient(135deg, #e8a0b4, #d888a8);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(216, 136, 168, 0.4);
+}
+
+.composer__btn--primary:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(40, 30, 45, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.preview-overlay__inner {
+  text-align: center;
+  animation: fade-in 0.25s ease;
+}
+
+.preview-overlay__label {
+  font-family: 'Itim', cursive;
+  color: #fff;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.preview-overlay__actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.preview-overlay__actions .composer__btn {
+  flex: 0 1 auto;
+  min-width: 120px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
