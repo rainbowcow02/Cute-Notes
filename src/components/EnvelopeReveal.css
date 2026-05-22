@@ -3,8 +3,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
+  width: 100%;
+  flex: 1;
+  min-height: min(100%, calc(100vh - 4rem));
   padding: 2rem 1.25rem;
+}
+
+.envelope-scene__opened {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+.envelope-scene__send-back {
+  font-family: 'Itim', cursive;
+  font-size: 1.05rem;
+  color: #c87898;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid #e8c0d0;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.envelope-scene__send-back:hover {
+  background: #fff;
+  transform: translateY(-1px);
 }
 
 .envelope {
@@ -34,84 +62,15 @@
   letter-spacing: 0.04em;
 }
 
-.envelope__body {
-  position: relative;
-  width: 260px;
-  height: 168px;
-}
-
-.envelope__pocket {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 130px;
-  background: var(--env-inner);
-  border-radius: 0 0 6px 6px;
-  box-shadow:
-    inset 0 2px 8px rgba(0, 0, 0, 0.06),
-    0 12px 32px rgba(0, 0, 0, 0.14);
-}
-
-.envelope__pocket::before,
-.envelope__pocket::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-
-.envelope__pocket::before {
-  left: 0;
-  border-width: 65px 0 0 130px;
-  border-color: var(--env-outer) transparent transparent transparent;
-}
-
-.envelope__pocket::after {
-  right: 0;
-  border-width: 65px 130px 0 0;
-  border-color: transparent var(--env-outer) transparent transparent;
-}
-
-.envelope__flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
-  background: var(--env-flap);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  transform-origin: top center;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.envelope__seal {
-  position: absolute;
-  top: 72px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--env-seal);
-  color: var(--env-seal-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  z-index: 3;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease;
-}
-
-.envelope:hover .envelope__seal {
-  transform: translateX(-50%) scale(1.06);
+.envelope__svg {
+  display: block;
+  flex-shrink: 0;
 }
 
 .envelope-reveal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   animation: card-emerge 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 

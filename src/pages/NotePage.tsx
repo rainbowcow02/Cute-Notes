@@ -21,7 +21,9 @@ export function NotePage() {
 
   return (
     <div className="note-page">
-      <EnvelopeReveal note={note} />
+      <main className="note-page__main">
+        <EnvelopeReveal note={note} />
+      </main>
       <footer className="note-page__footer">
         <Link to="/" className="note-page__brand">
           Cute Notes

@@ -1,8 +1,18 @@
 .note-page {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #fdf6f8 0%, #f0e8f4 100%);
+}
+
+.note-page__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .note-page--error {

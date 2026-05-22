@@ -1,5 +1,7 @@
 import type { AnimationId, CardStyleId } from '../types/note'
 
+export type CardBorderStyle = 'chunky' | 'layered' | 'scalloped' | 'celestial' | 'rustic' | 'pixel'
+
 export interface CardStyle {
   id: CardStyleId
   name: string
@@ -7,6 +9,17 @@ export interface CardStyle {
   motif: string
   motifSecondary?: string
   defaultAnimation: AnimationId
+  border: {
+    style: CardBorderStyle
+    frame: string
+    frameShadow?: string
+    innerLine?: string
+    innerLine2?: string
+    framePadding: number
+    innerPadding: number
+    frameRadius?: number
+    surfaceRadius?: number
+  }
   fonts: {
     salutation: string
     body: string
@@ -15,6 +28,7 @@ export interface CardStyle {
   colors: {
     bg: string
     bgPattern?: string
+    surface?: string
     accent: string
     border: string
     text: string
@@ -38,23 +52,33 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '✦',
     motifSecondary: '🌿',
     defaultAnimation: 'stars',
+    border: {
+      style: 'chunky',
+      frame: '#dff2dc',
+      frameShadow: '#c5e8c8',
+      innerLine: 'transparent',
+      framePadding: 15,
+      innerPadding: 24,
+      frameRadius: 19,
+      surfaceRadius: 17,
+    },
     fonts: { salutation: 'Itim', body: '"Jersey 15"', valediction: 'Itim' },
     colors: {
-      bg: '#e8f4ec',
+      bg: '#fefefe',
       bgPattern:
-        'linear-gradient(#d4e8da 1px, transparent 1px), linear-gradient(90deg, #d4e8da 1px, transparent 1px)',
-      accent: '#7eb89a',
-      border: '#e8c547',
-      text: '#2d4a38',
-      textMuted: '#5a7d68',
-      ink: '#1e3a2c',
+        'linear-gradient(#e9e9e9 0.5px, transparent 0.5px), linear-gradient(90deg, #e9e9e9 0.5px, transparent 0.5px)',
+      accent: '#d8f3e6',
+      border: '#e9e9e9',
+      text: '#0e5be2',
+      textMuted: '#0e5be2',
+      ink: '#0e5be2',
     },
     envelope: {
-      outer: '#b8dcc4',
-      inner: '#d4ecd9',
-      flap: '#9ec9ad',
-      seal: '#e8c547',
-      sealText: '#5a4a10',
+      outer: '#dff2dc',
+      inner: '#fefefe',
+      flap: '#c8e8c4',
+      seal: '#0e5be2',
+      sealText: '#fefefe',
     },
   },
   {
@@ -64,9 +88,19 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '🦆',
     motifSecondary: '💧',
     defaultAnimation: 'rainbow-confetti',
+    border: {
+      style: 'layered',
+      frame: '#0f2f8f',
+      innerLine: '#ffffff',
+      innerLine2: '#ffffff',
+      framePadding: 24,
+      innerPadding: 22,
+      frameRadius: 12,
+      surfaceRadius: 4,
+    },
     fonts: { salutation: 'Itim', body: 'Kurale', valediction: 'Itim' },
     colors: {
-      bg: '#1a4fd6',
+      bg: 'linear-gradient(175deg, #2a65e8 0%, #1a4fd6 45%, #123a9e 100%)',
       accent: '#ffffff',
       border: '#ffffff',
       text: '#ffffff',
@@ -88,6 +122,16 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '🌸',
     motifSecondary: '☁️',
     defaultAnimation: 'cherry-blossoms',
+    border: {
+      style: 'scalloped',
+      frame: '#f0c8d8',
+      innerLine: '#ffffff',
+      innerLine2: '#fce8ef',
+      framePadding: 16,
+      innerPadding: 20,
+      frameRadius: 20,
+      surfaceRadius: 255,
+    },
     fonts: { salutation: 'Kurale', body: 'Kurale', valediction: 'Itim' },
     colors: {
       bg: 'linear-gradient(165deg, #fce8ef 0%, #e8f0e4 55%, #faf6f8 100%)',
@@ -112,6 +156,17 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '✧',
     motifSecondary: '🌙',
     defaultAnimation: 'stars',
+    border: {
+      style: 'celestial',
+      frame: '#d4a574',
+      frameShadow: '#9b7bb8',
+      innerLine: 'rgba(245, 230, 200, 0.6)',
+      innerLine2: 'rgba(155, 123, 184, 0.5)',
+      framePadding: 20,
+      innerPadding: 24,
+      frameRadius: 14,
+      surfaceRadius: 8,
+    },
     fonts: { salutation: 'Kurale', body: '"Jersey 15"', valediction: 'Kurale' },
     colors: {
       bg: 'linear-gradient(160deg, #1a1428 0%, #2d1f3d 50%, #1e1630 100%)',
@@ -136,6 +191,16 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '🍄',
     motifSecondary: '🌾',
     defaultAnimation: 'leaves',
+    border: {
+      style: 'rustic',
+      frame: '#c4a882',
+      frameShadow: '#a08060',
+      innerLine: '#b85c38',
+      framePadding: 12,
+      innerPadding: 20,
+      frameRadius: 32,
+      surfaceRadius: 24,
+    },
     fonts: { salutation: 'Itim', body: 'Itim', valediction: 'Itim' },
     colors: {
       bg: '#f5ebe0',
@@ -162,9 +227,22 @@ export const CARD_STYLES: CardStyle[] = [
     motif: '★',
     motifSecondary: '💿',
     defaultAnimation: 'rainbow-confetti',
+    border: {
+      style: 'pixel',
+      frame: '#2a1040',
+      frameShadow: '#000000',
+      innerLine: '#ffffff',
+      innerLine2: '#c8f542',
+      framePadding: 14,
+      innerPadding: 18,
+      frameRadius: 0,
+      surfaceRadius: 0,
+    },
     fonts: { salutation: '"Jersey 15"', body: '"Jersey 15"', valediction: '"Jersey 15"' },
     colors: {
-      bg: 'linear-gradient(135deg, #ff4da6 0%, #7ee8fa 50%, #c8f542 100%)',
+      bg: 'linear-gradient(180deg, #ff6eb8 0%, #7ee8fa 50%, #c8f542 100%)',
+      bgPattern:
+        'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px)',
       accent: '#ffffff',
       border: '#ffffff',
       text: '#ffffff',
