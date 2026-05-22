@@ -6,7 +6,6 @@ import './NoteCard.css'
 interface NoteCardProps {
   note: NoteData
   showParticles?: boolean
-  compact?: boolean
 }
 
 function surfaceClass(style: ReturnType<typeof getCardStyle>): string {
@@ -15,12 +14,12 @@ function surfaceClass(style: ReturnType<typeof getCardStyle>): string {
   return 'note-card__surface--fill'
 }
 
-export function NoteCard({ note, showParticles = true, compact = false }: NoteCardProps) {
+export function NoteCard({ note, showParticles = true }: NoteCardProps) {
   const style = getCardStyle(note.styleId)
 
   return (
     <article
-      className={`note-card note-card--${style.id} note-card--border-${style.border.style} ${compact ? 'note-card--compact' : ''}`}
+      className={`note-card note-card--${style.id} note-card--border-${style.border.style}`}
       style={
         {
           '--card-bg': style.colors.bg,
@@ -47,6 +46,10 @@ export function NoteCard({ note, showParticles = true, compact = false }: NoteCa
       }
     >
       <div className="note-card__frame">
+        {style.id === 'grid-garden' && note.salutation && (
+          <p className="note-card__salutation">{note.salutation}</p>
+        )}
+
         <div className={`note-card__surface ${surfaceClass(style)}`}>
           {showParticles && (
             <div className="note-card__particles">
@@ -54,17 +57,12 @@ export function NoteCard({ note, showParticles = true, compact = false }: NoteCa
             </div>
           )}
 
-          <div className="note-card__motif note-card__motif--tl" aria-hidden="true">
+          <div className="note-card__motif" aria-hidden="true">
             {style.motif}
           </div>
-          {style.motifSecondary && (
-            <div className="note-card__motif note-card__motif--br" aria-hidden="true">
-              {style.motifSecondary}
-            </div>
-          )}
 
           <div className="note-card__inner">
-            {note.salutation && (
+            {style.id !== 'grid-garden' && note.salutation && (
               <p className="note-card__salutation">{note.salutation}</p>
             )}
             <div className="note-card__body-wrap">
