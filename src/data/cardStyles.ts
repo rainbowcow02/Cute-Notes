@@ -70,7 +70,7 @@ export const CARD_STYLES: CardStyle[] = [
       accent: '#d8f3e6',
       border: '#e9e9e9',
       text: '#0e5be2',
-      textMuted: '#0e5be2',
+      textMuted: '#1461df',
       ink: '#0e5be2',
     },
     envelope: {

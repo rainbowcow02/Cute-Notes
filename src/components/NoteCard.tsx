@@ -57,14 +57,9 @@ export function NoteCard({ note, showParticles = true }: NoteCardProps) {
             </div>
           )}
 
-          <div className="note-card__motif note-card__motif--tl" aria-hidden="true">
+          <div className="note-card__motif" aria-hidden="true">
             {style.motif}
           </div>
-          {style.motifSecondary && (
-            <div className="note-card__motif note-card__motif--br" aria-hidden="true">
-              {style.motifSecondary}
-            </div>
-          )}
 
           <div className="note-card__inner">
             {style.id !== 'grid-garden' && note.salutation && (

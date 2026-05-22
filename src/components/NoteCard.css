@@ -46,22 +46,13 @@
 
 .note-card__motif {
   position: absolute;
+  bottom: 14px;
+  left: 16px;
   font-size: 1.5rem;
   opacity: 0.35;
   z-index: 1;
   pointer-events: none;
   line-height: 1;
-}
-
-.note-card__motif--tl {
-  top: 14px;
-  left: 16px;
-}
-
-.note-card__motif--br {
-  bottom: 14px;
-  right: 16px;
-  font-size: 1.25rem;
 }
 
 .note-card__inner {
@@ -77,7 +68,7 @@
 .note-card__salutation {
   font-family: var(--font-salutation), cursive;
   font-size: 1.5rem;
-  line-height: 1;
+  line-height: 1.2;
   margin: 0 0 0.5rem;
   color: var(--card-text-muted);
   text-align: left;
@@ -96,7 +87,7 @@
 .note-card__body {
   font-family: var(--font-body), serif;
   font-size: 2.5rem;
-  line-height: 1;
+  line-height: 1.2;
   margin: 0;
   width: 100%;
   text-align: center;
@@ -112,7 +103,7 @@
 .note-card__valediction {
   font-family: var(--font-valediction), cursive;
   font-size: 1.5rem;
-  line-height: 1;
+  line-height: 1.2;
   margin: 0.5rem 0 0;
   color: var(--card-text-muted);
   text-align: right;
@@ -190,7 +181,6 @@
 .note-card--grid-garden .note-card__salutation {
   padding: 0 0 20px;
   margin: 0;
-  color: #0e5be2;
   font-family: var(--font-body), sans-serif;
 }
 
@@ -199,14 +189,13 @@
   min-height: 0;
 }
 
-.note-card--grid-garden .note-card__body,
-.note-card--grid-garden .note-card__valediction {
+.note-card--grid-garden .note-card__body {
   color: #0e5be2;
   font-family: var(--font-body), sans-serif;
 }
 
-.note-card--grid-garden .note-card__body {
-  line-height: 1.35;
+.note-card--grid-garden .note-card__valediction {
+  font-family: var(--font-body), sans-serif;
 }
 
 /* ── Duck Pond: nautical blue fill + double white rings ── */
