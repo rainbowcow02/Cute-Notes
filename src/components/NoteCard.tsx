@@ -6,7 +6,6 @@ import './NoteCard.css'
 interface NoteCardProps {
   note: NoteData
   showParticles?: boolean
-  compact?: boolean
 }
 
 function surfaceClass(style: ReturnType<typeof getCardStyle>): string {
@@ -15,12 +14,12 @@ function surfaceClass(style: ReturnType<typeof getCardStyle>): string {
   return 'note-card__surface--fill'
 }
 
-export function NoteCard({ note, showParticles = true, compact = false }: NoteCardProps) {
+export function NoteCard({ note, showParticles = true }: NoteCardProps) {
   const style = getCardStyle(note.styleId)
 
   return (
     <article
-      className={`note-card note-card--${style.id} note-card--border-${style.border.style} ${compact ? 'note-card--compact' : ''}`}
+      className={`note-card note-card--${style.id} note-card--border-${style.border.style}`}
       style={
         {
           '--card-bg': style.colors.bg,

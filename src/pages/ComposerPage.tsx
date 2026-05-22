@@ -204,7 +204,7 @@ export function ComposerPage() {
         <section className="composer__section composer__section--preview-mini">
           <h2 className="composer__section-title">Live preview</h2>
           <div className="composer__card-wrap">
-            <NoteCard note={note} showParticles compact />
+            <NoteCard note={note} showParticles />
           </div>
         </section>
       </main>
