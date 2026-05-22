@@ -205,13 +205,58 @@
 }
 
 .stationery-pad.note-card--grid-garden.note-card--border-chunky .stationery-pad__frame {
-  box-shadow:
-    inset 0 4px 10px rgba(236, 244, 233, 0.08),
-    inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+}
+
+.stationery-pad.note-card--grid-garden.note-card--border-chunky .stationery-pad__frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: inset 0 4px 10px rgba(236, 244, 233, 0.08);
+  mix-blend-mode: hard-light;
 }
 
 .stationery-pad.note-card--grid-garden.note-card--border-chunky .stationery-pad__surface {
   box-shadow: none;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-pad__frame {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-pad__frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-field--salutation {
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-field__input--salutation {
+  padding: 0;
+  line-height: 1;
+  height: 1em;
+  color: #0e5be2;
+  font-family: var(--font-body), sans-serif;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-field__input--body,
+.stationery-pad.note-card--grid-garden .stationery-field__input--valediction {
+  color: #0e5be2;
+  font-family: var(--font-body), sans-serif;
+}
+
+.stationery-pad.note-card--grid-garden .stationery-pad__surface {
+  flex: 1;
+  min-height: 0;
 }
 
 .stationery-pad.note-card--grid-garden .stationery-pad__surface--pattern {
@@ -300,8 +345,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin-bottom: 0;
+  min-height: 0;
+}
+
+.stationery-field__body-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 124px;
+  width: 100%;
 }
 
 .stationery-field__input {
@@ -320,29 +375,50 @@
 
 .stationery-field__input--salutation {
   font-family: var(--font-salutation), cursive;
-  font-size: 1rem;
-  padding: 0.25rem 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  height: 1em;
+  padding: 0;
   text-align: left;
+}
+
+.stationery-field__input--salutation:focus-visible {
+  outline-offset: 0;
 }
 
 .stationery-field__input--body {
   font-family: var(--font-body), serif;
-  font-size: 1.35rem;
-  line-height: 1.5;
-  padding: 1rem 0;
+  font-size: 2.5rem;
+  line-height: 1;
   text-align: center;
-  flex: 1;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  field-sizing: content;
+  overflow-y: auto;
+  flex: 0 1 auto;
+}
+
+.stationery-field:has(.stationery-field__input--valediction) {
+  margin-top: 0.5rem;
 }
 
 .stationery-field__input--valediction {
   font-family: var(--font-valediction), cursive;
-  font-size: 0.95rem;
-  padding: 0.5rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  height: 1em;
+  padding: 0;
   text-align: right;
+}
+
+.stationery-field__input--valediction:focus-visible {
+  outline-offset: 0;
 }
 
 .stationery-field__count {
   align-self: flex-end;
+  flex-shrink: 0;
   font-size: 0.7rem;
   color: var(--pad-muted);
   opacity: 0.7;

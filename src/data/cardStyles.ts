@@ -57,12 +57,12 @@ export const CARD_STYLES: CardStyle[] = [
       frame: '#dff2dc',
       frameShadow: '#c5e8c8',
       innerLine: 'transparent',
-      framePadding: 15,
+      framePadding: 36,
       innerPadding: 24,
-      frameRadius: 19,
-      surfaceRadius: 17,
+      frameRadius: 32,
+      surfaceRadius: 24,
     },
-    fonts: { salutation: 'Itim', body: '"Jersey 15"', valediction: 'Itim' },
+    fonts: { salutation: '"Jersey 15"', body: '"Jersey 15"', valediction: '"Jersey 15"' },
     colors: {
       bg: '#fefefe',
       bgPattern:

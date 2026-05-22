@@ -78,7 +78,7 @@
 
 .note-card__salutation {
   font-family: var(--font-salutation), cursive;
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.4;
   margin: 0 0 0.5rem;
   color: var(--card-text-muted);
@@ -97,17 +97,13 @@
 
 .note-card__body {
   font-family: var(--font-body), serif;
-  font-size: 1.35rem;
+  font-size: 2.5rem;
   line-height: 1.55;
   margin: 0;
   width: 100%;
   text-align: center;
   color: var(--card-ink);
   word-break: break-word;
-}
-
-.note-card--compact .note-card__body {
-  font-size: 1.15rem;
 }
 
 .note-card__placeholder {
@@ -117,7 +113,7 @@
 
 .note-card__valediction {
   font-family: var(--font-valediction), cursive;
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   line-height: 1.4;
   margin: 0.5rem 0 0;
   color: var(--card-text-muted);
@@ -144,9 +140,18 @@
 }
 
 .note-card--grid-garden.note-card--border-chunky .note-card__frame {
-  box-shadow:
-    inset 0 4px 10px rgba(236, 244, 233, 0.08),
-    inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+}
+
+.note-card--grid-garden.note-card--border-chunky .note-card__frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: inset 0 4px 10px rgba(236, 244, 233, 0.08);
+  mix-blend-mode: hard-light;
 }
 
 .note-card--grid-garden.note-card--border-chunky .note-card__surface {
@@ -172,19 +177,38 @@
     #fefefe;
 }
 
-.note-card--grid-garden .note-card__body {
-  font-size: 1.625rem;
-  line-height: 1.35;
+.note-card--grid-garden .note-card__frame {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
 }
 
-.note-card--grid-garden .note-card__salutation,
-.note-card--grid-garden .note-card__valediction {
-  color: var(--card-ink);
+.note-card--grid-garden .note-card__frame > * {
+  position: relative;
+  z-index: 1;
 }
 
-.note-card--grid-garden .note-card__valediction {
+.note-card--grid-garden .note-card__salutation {
+  padding: 0 0 20px;
+  margin: 0;
+  color: #0e5be2;
   font-family: var(--font-body), sans-serif;
-  font-size: 1.125rem;
+}
+
+.note-card--grid-garden .note-card__surface {
+  flex: 1;
+  min-height: 0;
+}
+
+.note-card--grid-garden .note-card__body,
+.note-card--grid-garden .note-card__valediction {
+  color: #0e5be2;
+  font-family: var(--font-body), sans-serif;
+}
+
+.note-card--grid-garden .note-card__body {
+  line-height: 1.35;
 }
 
 /* ── Duck Pond: nautical blue fill + double white rings ── */

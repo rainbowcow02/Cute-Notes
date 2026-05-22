@@ -47,6 +47,10 @@ export function NoteCard({ note, showParticles = true, compact = false }: NoteCa
       }
     >
       <div className="note-card__frame">
+        {style.id === 'grid-garden' && note.salutation && (
+          <p className="note-card__salutation">{note.salutation}</p>
+        )}
+
         <div className={`note-card__surface ${surfaceClass(style)}`}>
           {showParticles && (
             <div className="note-card__particles">
@@ -64,7 +68,7 @@ export function NoteCard({ note, showParticles = true, compact = false }: NoteCa
           )}
 
           <div className="note-card__inner">
-            {note.salutation && (
+            {style.id !== 'grid-garden' && note.salutation && (
               <p className="note-card__salutation">{note.salutation}</p>
             )}
             <div className="note-card__body-wrap">

@@ -104,6 +104,20 @@ export function ComposerPage() {
             }
           >
             <div className="stationery-pad__frame">
+              {style.id === 'grid-garden' && (
+                <label className="stationery-field stationery-field--salutation">
+                  <span className="visually-hidden">Salutation</span>
+                  <input
+                    type="text"
+                    className="stationery-field__input stationery-field__input--salutation"
+                    placeholder="dear my little duck prince,"
+                    value={note.salutation}
+                    onChange={(e) => update({ salutation: e.target.value })}
+                    maxLength={80}
+                  />
+                </label>
+              )}
+
               <div
                 className={`stationery-pad__surface ${
                   style.colors.bgPattern
@@ -117,28 +131,32 @@ export function ComposerPage() {
                   {style.motif}
                 </span>
 
-            <label className="stationery-field">
-              <span className="visually-hidden">Salutation</span>
-              <input
-                type="text"
-                className="stationery-field__input stationery-field__input--salutation"
-                placeholder="dear my little duck prince,"
-                value={note.salutation}
-                onChange={(e) => update({ salutation: e.target.value })}
-                maxLength={80}
-              />
-            </label>
+                {style.id !== 'grid-garden' && (
+                  <label className="stationery-field">
+                    <span className="visually-hidden">Salutation</span>
+                    <input
+                      type="text"
+                      className="stationery-field__input stationery-field__input--salutation"
+                      placeholder="dear my little duck prince,"
+                      value={note.salutation}
+                      onChange={(e) => update({ salutation: e.target.value })}
+                      maxLength={80}
+                    />
+                  </label>
+                )}
 
             <label className="stationery-field stationery-field--body">
               <span className="visually-hidden">Note body</span>
-              <textarea
-                className="stationery-field__input stationery-field__input--body"
-                placeholder="I miss your face today."
-                value={note.body}
-                onChange={(e) => update({ body: e.target.value.slice(0, BODY_MAX) })}
-                rows={4}
-                maxLength={BODY_MAX}
-              />
+              <div className="stationery-field__body-wrap">
+                <textarea
+                  className="stationery-field__input stationery-field__input--body"
+                  placeholder="I miss your face today."
+                  value={note.body}
+                  onChange={(e) => update({ body: e.target.value.slice(0, BODY_MAX) })}
+                  rows={1}
+                  maxLength={BODY_MAX}
+                />
+              </div>
               <span className="stationery-field__count" aria-live="polite">
                 {note.body.length}/{BODY_MAX}
               </span>
