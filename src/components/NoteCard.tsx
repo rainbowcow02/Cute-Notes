@@ -47,6 +47,16 @@ export function NoteCard({ note, showParticles = true }: NoteCardProps) {
       }
     >
       <div className="note-card__frame">
+        {style.id === 'duck-pond' && (
+          <>
+            <span
+              className="note-card__border-brush note-card__border-brush--back"
+              aria-hidden="true"
+            />
+            <span className="note-card__border-brush" aria-hidden="true" />
+          </>
+        )}
+
         {style.id === 'grid-garden' && note.salutation && (
           <p className="note-card__salutation">{formatSalutation(note.salutation)}</p>
         )}

@@ -204,6 +204,24 @@
   box-shadow: 0 8px 24px rgba(0, 107, 192, 0.45);
 }
 
+.note-card--duck-pond .note-card__border-brush,
+.note-card--duck-pond .note-card__border-brush--back {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+}
+
+.note-card--duck-pond .note-card__border-brush {
+  inset: 14px;
+  z-index: 2;
+}
+
+.note-card--duck-pond .note-card__border-brush--back {
+  inset: 10px;
+  z-index: 1;
+}
+
 .note-card--duck-pond .note-card__surface {
   display: flex;
   flex-direction: column;
