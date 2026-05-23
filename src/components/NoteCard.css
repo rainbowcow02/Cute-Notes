@@ -205,10 +205,27 @@
 }
 
 .note-card--duck-pond .note-card__surface {
-  background:
-    url('/scallop-bg.svg') center / contain no-repeat,
-    var(--card-bg);
+  display: flex;
+  flex-direction: column;
   box-shadow: none;
+}
+
+.note-card--duck-pond .note-card__frame {
+  height: auto;
+}
+
+.note-card--duck-pond .note-card__inner {
+  flex: 1;
+  width: 100%;
+  background-color: var(--card-bg);
+  background-image: url('/scallop-bg.svg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+}
+
+.note-card--duck-pond .note-card__body-wrap {
+  flex: 0 1 auto;
 }
 
 /* ── Sakura Cloud: soft frame + gradient fill ── */

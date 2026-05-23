@@ -161,6 +161,16 @@ export function ComposerPage() {
             }
           >
             <div className="stationery-pad__frame">
+              {style.id === 'duck-pond' && (
+                <>
+                  <span
+                    className="stationery-pad__border-brush stationery-pad__border-brush--back"
+                    aria-hidden="true"
+                  />
+                  <span className="stationery-pad__border-brush" aria-hidden="true" />
+                </>
+              )}
+
               {style.id === 'grid-garden' && (
                 <label className="stationery-field stationery-field--salutation">
                   <span className="visually-hidden">Salutation</span>
@@ -184,6 +194,7 @@ export function ComposerPage() {
                   {style.motif}
                 </span>
 
+                <div className="note-card__inner">
                 {style.id !== 'grid-garden' && (
                   <label className="stationery-field">
                     <span className="visually-hidden">Salutation</span>
@@ -218,6 +229,7 @@ export function ComposerPage() {
                 onChange={(valediction) => update({ valediction })}
               />
             </label>
+                </div>
               </div>
             </div>
           </div>

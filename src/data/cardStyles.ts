@@ -92,7 +92,7 @@ export const CARD_STYLES: CardStyle[] = [
       style: 'layered',
       frame: '#006bc0',
       framePadding: 24,
-      innerPadding: 22,
+      innerPadding: 36,
       frameRadius: 12,
       surfaceRadius: 4,
     },
