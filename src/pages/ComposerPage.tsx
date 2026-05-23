@@ -4,6 +4,7 @@ import { EMPTY_NOTE } from '../types/note'
 import { CARD_STYLES, getCardStyle } from '../data/cardStyles'
 import { ANIMATIONS } from '../data/animations'
 import { NoteCard } from '../components/NoteCard'
+import { ParticleCanvas } from '../components/ParticleCanvas'
 import { ShareModal } from '../components/ShareModal'
 import { noteShareUrl } from '../lib/encodeNote'
 import { formatSalutation, formatValediction, stripSalutationPunctuation, stripValedictionPunctuation } from '../lib/formatNoteFields'
@@ -23,7 +24,7 @@ function DecoratedSalutationInput({
       <input
         type="text"
         className="stationery-field__input stationery-field__input--salutation"
-        placeholder="dear my little duck prince"
+        placeholder="dear my little duck prince,"
         value={value}
         onChange={(e) => onChange(stripSalutationPunctuation(e.target.value))}
         maxLength={80}
@@ -131,116 +132,10 @@ export function ComposerPage() {
           </div>
         </section>
 
-        {/* Step 2: Write */}
-        <section className="composer__section composer__section--write">
-          <h2 className="composer__section-title">
-            <span className="composer__step">2</span> Write your note
-          </h2>
-
-          <div
-            className={`stationery-pad note-card--${style.id} note-card--border-${style.border.style}`}
-            style={
-              {
-                '--card-bg': style.colors.bg,
-                '--card-bg-layer': style.colors.bgPattern
-                  ? `${style.colors.bgPattern}, ${style.colors.bg}`
-                  : style.colors.bg,
-                '--card-frame': style.border.frame,
-                '--card-frame-shadow': style.border.frameShadow ?? style.border.frame,
-                '--card-inner-line': style.border.innerLine ?? style.colors.border,
-                '--card-inner-line-2':
-                  style.border.innerLine2 ?? style.border.innerLine ?? style.colors.border,
-                '--card-frame-padding': `${style.border.framePadding}px`,
-                '--card-inner-padding': `${style.border.innerPadding}px`,
-                '--card-frame-radius': `${style.border.frameRadius ?? 12}px`,
-                '--card-surface-radius': `${style.border.surfaceRadius ?? 8}px`,
-                '--pad-text': style.colors.ink,
-                '--pad-muted': style.colors.textMuted,
-                '--font-salutation': style.fonts.salutation,
-                '--font-body': style.fonts.body,
-                '--font-valediction': style.fonts.valediction,
-              } as React.CSSProperties
-            }
-          >
-            <div className="stationery-pad__frame">
-              {style.id === 'duck-pond' && (
-                <>
-                  <span
-                    className="stationery-pad__border-brush stationery-pad__border-brush--back"
-                    aria-hidden="true"
-                  />
-                  <span className="stationery-pad__border-brush" aria-hidden="true" />
-                </>
-              )}
-
-              {style.id === 'grid-garden' && (
-                <label className="stationery-field stationery-field--salutation">
-                  <span className="visually-hidden">Salutation</span>
-                  <DecoratedSalutationInput
-                    value={note.salutation}
-                    onChange={(salutation) => update({ salutation })}
-                  />
-                </label>
-              )}
-
-              <div
-                className={`stationery-pad__surface ${
-                  style.colors.bgPattern
-                    ? 'stationery-pad__surface--pattern'
-                    : style.colors.bg.includes('gradient')
-                      ? 'stationery-pad__surface--gradient'
-                      : 'stationery-pad__surface--fill'
-                }`}
-              >
-                <span className="stationery-pad__motif" aria-hidden="true">
-                  {style.motif}
-                </span>
-
-                <div className="note-card__inner">
-                {style.id !== 'grid-garden' && (
-                  <label className="stationery-field">
-                    <span className="visually-hidden">Salutation</span>
-                    <DecoratedSalutationInput
-                      value={note.salutation}
-                      onChange={(salutation) => update({ salutation })}
-                    />
-                  </label>
-                )}
-
-            <label className="stationery-field stationery-field--body">
-              <span className="visually-hidden">Note body</span>
-              <div className="stationery-field__body-wrap">
-                <textarea
-                  className="stationery-field__input stationery-field__input--body"
-                  placeholder="I miss your face today."
-                  value={note.body}
-                  onChange={(e) => update({ body: e.target.value.slice(0, BODY_MAX) })}
-                  rows={1}
-                  maxLength={BODY_MAX}
-                />
-              </div>
-              <span className="stationery-field__count" aria-live="polite">
-                {note.body.length}/{BODY_MAX}
-              </span>
-            </label>
-
-            <label className="stationery-field">
-              <span className="visually-hidden">Valediction</span>
-              <DecoratedValedictionInput
-                value={note.valediction}
-                onChange={(valediction) => update({ valediction })}
-              />
-            </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Step 3: Animation */}
+        {/* Step 2: Animation */}
         <section className="composer__section">
           <h2 className="composer__section-title">
-            <span className="composer__step">3</span> Pick a vibe
+            <span className="composer__step">2</span> Pick a vibe
           </h2>
           <div className="animation-picker" role="listbox" aria-label="Animation effects">
             {ANIMATIONS.map((a) => (
@@ -263,7 +158,108 @@ export function ComposerPage() {
         <aside className="composer__preview-column" aria-label="Live preview">
           <h2 className="composer__section-title">Live preview</h2>
           <div className="composer__card-wrap">
-            <NoteCard note={note} showParticles />
+            <div
+              className={`stationery-pad note-card--${style.id} note-card--border-${style.border.style}`}
+              style={
+                {
+                  '--card-bg': style.colors.bg,
+                  '--card-bg-layer': style.colors.bgPattern
+                    ? `${style.colors.bgPattern}, ${style.colors.bg}`
+                    : style.colors.bg,
+                  '--card-frame': style.border.frame,
+                  '--card-frame-shadow': style.border.frameShadow ?? style.border.frame,
+                  '--card-inner-line': style.border.innerLine ?? style.colors.border,
+                  '--card-inner-line-2':
+                    style.border.innerLine2 ?? style.border.innerLine ?? style.colors.border,
+                  '--card-frame-padding': `${style.border.framePadding}px`,
+                  '--card-inner-padding': `${style.border.innerPadding}px`,
+                  '--card-frame-radius': `${style.border.frameRadius ?? 12}px`,
+                  '--card-surface-radius': `${style.border.surfaceRadius ?? 8}px`,
+                  '--pad-text': style.colors.ink,
+                  '--pad-muted': style.colors.textMuted,
+                  '--font-salutation': style.fonts.salutation,
+                  '--font-body': style.fonts.body,
+                  '--font-valediction': style.fonts.valediction,
+                } as React.CSSProperties
+              }
+            >
+              <div className="stationery-pad__frame">
+                {style.id === 'duck-pond' && (
+                  <>
+                    <span
+                      className="stationery-pad__border-brush stationery-pad__border-brush--back"
+                      aria-hidden="true"
+                    />
+                    <span className="stationery-pad__border-brush" aria-hidden="true" />
+                  </>
+                )}
+
+                {style.id === 'grid-garden' && (
+                  <label className="stationery-field stationery-field--salutation">
+                    <span className="visually-hidden">Salutation</span>
+                    <DecoratedSalutationInput
+                      value={note.salutation}
+                      onChange={(salutation) => update({ salutation })}
+                    />
+                  </label>
+                )}
+
+                <div
+                  className={`stationery-pad__surface ${
+                    style.colors.bgPattern
+                      ? 'stationery-pad__surface--pattern'
+                      : style.colors.bg.includes('gradient')
+                        ? 'stationery-pad__surface--gradient'
+                        : 'stationery-pad__surface--fill'
+                  }`}
+                >
+                  <div className="stationery-pad__particles">
+                    <ParticleCanvas animationId={note.animationId} />
+                  </div>
+
+                  <span className="stationery-pad__motif" aria-hidden="true">
+                    {style.motif}
+                  </span>
+
+                  <div className="note-card__inner">
+                    {style.id !== 'grid-garden' && (
+                      <label className="stationery-field">
+                        <span className="visually-hidden">Salutation</span>
+                        <DecoratedSalutationInput
+                          value={note.salutation}
+                          onChange={(salutation) => update({ salutation })}
+                        />
+                      </label>
+                    )}
+
+                    <label className="stationery-field stationery-field--body">
+                      <span className="visually-hidden">Note body</span>
+                      <div className="stationery-field__body-wrap">
+                        <textarea
+                          className="stationery-field__input stationery-field__input--body"
+                          placeholder="I miss your face today."
+                          value={note.body}
+                          onChange={(e) => update({ body: e.target.value.slice(0, BODY_MAX) })}
+                          rows={1}
+                          maxLength={BODY_MAX}
+                        />
+                      </div>
+                      <span className="stationery-field__count" aria-live="polite">
+                        {note.body.length}/{BODY_MAX}
+                      </span>
+                    </label>
+
+                    <label className="stationery-field">
+                      <span className="visually-hidden">Valediction</span>
+                      <DecoratedValedictionInput
+                        value={note.valediction}
+                        onChange={(valediction) => update({ valediction })}
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </aside>
       </main>

@@ -41,6 +41,11 @@
   margin-bottom: 0;
 }
 
+.composer__steps {
+  width: 100%;
+  min-width: 0;
+}
+
 .composer__preview-column {
   width: 100%;
   min-width: 0;
@@ -53,8 +58,14 @@
 
 @media (min-width: 768px) {
   .composer__main {
-    grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+    grid-template-columns: 400px minmax(0, 1fr);
     align-items: start;
+  }
+
+  .composer__steps {
+    width: 400px;
+    max-width: 400px;
+    align-self: center;
   }
 
   .composer__preview-column {
@@ -224,14 +235,25 @@
   flex-direction: column;
   border-radius: var(--card-surface-radius);
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.stationery-pad__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stationery-pad__surface > .note-card__inner {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  gap: 0;
 }
 
 .stationery-pad__surface:has(.note-card__inner) {
   padding: 0;
-}
-
-.stationery-pad__surface > .note-card__inner {
-  flex: 1;
 }
 
 .stationery-pad__surface--fill {
@@ -564,11 +586,18 @@
 }
 
 .stationery-field__decorated--valediction:focus-within .stationery-field__auto-punct--prefix,
+.stationery-field__decorated--valediction:has(.stationery-field__input--valediction:placeholder-shown)
+  .stationery-field__auto-punct--prefix,
 .stationery-field__decorated--valediction:has(.stationery-field__input--valediction:not(:placeholder-shown))
   .stationery-field__auto-punct--prefix {
   opacity: 1;
   max-width: none;
   margin-right: 4px;
+}
+
+.stationery-field__decorated--valediction:has(.stationery-field__input--valediction:placeholder-shown)
+  .stationery-field__auto-punct--prefix {
+  opacity: 0.65;
 }
 
 .stationery-field__decorated--valediction .stationery-field__input--valediction {
