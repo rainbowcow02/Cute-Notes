@@ -198,17 +198,17 @@
   font-family: var(--font-body), sans-serif;
 }
 
-/* ── Duck Pond: nautical blue fill + double white rings ── */
+/* ── Duck Pond: cobalt frame + centered scallop motif ── */
 .note-card--border-layered .note-card__frame {
   background: var(--card-frame);
-  box-shadow: 0 8px 24px rgba(15, 47, 143, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 107, 192, 0.45);
 }
 
-.note-card--border-layered .note-card__surface {
-  background: var(--card-bg);
-  box-shadow:
-    0 0 0 3px var(--card-inner-line),
-    0 0 0 7px var(--card-inner-line-2);
+.note-card--duck-pond .note-card__surface {
+  background:
+    url('/scallop-bg.svg') center / contain no-repeat,
+    var(--card-bg);
+  box-shadow: none;
 }
 
 /* ── Sakura Cloud: soft frame + gradient fill ── */

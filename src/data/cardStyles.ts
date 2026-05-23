@@ -90,9 +90,7 @@ export const CARD_STYLES: CardStyle[] = [
     defaultAnimation: 'rainbow-confetti',
     border: {
       style: 'layered',
-      frame: '#0f2f8f',
-      innerLine: '#ffffff',
-      innerLine2: '#ffffff',
+      frame: '#006bc0',
       framePadding: 24,
       innerPadding: 22,
       frameRadius: 12,
@@ -100,12 +98,12 @@ export const CARD_STYLES: CardStyle[] = [
     },
     fonts: { salutation: 'Itim', body: 'Kurale', valediction: 'Itim' },
     colors: {
-      bg: 'linear-gradient(175deg, #2a65e8 0%, #1a4fd6 45%, #123a9e 100%)',
+      bg: '#006bc0',
       accent: '#ffffff',
       border: '#ffffff',
-      text: '#ffffff',
-      textMuted: '#c8d9ff',
-      ink: '#ffffff',
+      text: 'hsla(338, 91%, 53%, 1)',
+      textMuted: 'hsla(338, 91%, 53%, 1)',
+      ink: 'hsla(338, 91%, 53%, 1)',
     },
     envelope: {
       outer: '#153db8',
