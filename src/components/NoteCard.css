@@ -198,17 +198,52 @@
   font-family: var(--font-body), sans-serif;
 }
 
-/* ── Duck Pond: nautical blue fill + double white rings ── */
+/* ── Duck Pond: cobalt frame + centered scallop motif ── */
 .note-card--border-layered .note-card__frame {
   background: var(--card-frame);
-  box-shadow: 0 8px 24px rgba(15, 47, 143, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 107, 192, 0.45);
 }
 
-.note-card--border-layered .note-card__surface {
-  background: var(--card-bg);
-  box-shadow:
-    0 0 0 3px var(--card-inner-line),
-    0 0 0 7px var(--card-inner-line-2);
+.note-card--duck-pond .note-card__border-brush,
+.note-card--duck-pond .note-card__border-brush--back {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+}
+
+.note-card--duck-pond .note-card__border-brush {
+  inset: 14px;
+  z-index: 2;
+}
+
+.note-card--duck-pond .note-card__border-brush--back {
+  inset: 10px;
+  z-index: 1;
+}
+
+.note-card--duck-pond .note-card__surface {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.note-card--duck-pond .note-card__frame {
+  height: auto;
+}
+
+.note-card--duck-pond .note-card__inner {
+  flex: 1;
+  width: 100%;
+  background-color: var(--card-bg);
+  background-image: url('/scallop-bg.svg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+}
+
+.note-card--duck-pond .note-card__body-wrap {
+  flex: 0 1 auto;
 }
 
 /* ── Sakura Cloud: soft frame + gradient fill ── */

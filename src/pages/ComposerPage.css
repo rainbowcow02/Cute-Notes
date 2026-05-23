@@ -168,6 +168,24 @@
   box-sizing: border-box;
 }
 
+.stationery-pad.note-card--duck-pond .stationery-pad__border-brush,
+.stationery-pad.note-card--duck-pond .stationery-pad__border-brush--back {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+}
+
+.stationery-pad.note-card--duck-pond .stationery-pad__border-brush {
+  inset: 14px;
+  z-index: 2;
+}
+
+.stationery-pad.note-card--duck-pond .stationery-pad__border-brush--back {
+  inset: 10px;
+  z-index: 1;
+}
+
 .stationery-pad__surface {
   position: relative;
   min-height: calc(280px - 2 * var(--card-frame-padding));
@@ -176,6 +194,14 @@
   flex-direction: column;
   border-radius: var(--card-surface-radius);
   box-sizing: border-box;
+}
+
+.stationery-pad__surface:has(.note-card__inner) {
+  padding: 0;
+}
+
+.stationery-pad__surface > .note-card__inner {
+  flex: 1;
 }
 
 .stationery-pad__surface--fill {
@@ -253,6 +279,11 @@
   font-family: var(--font-body), sans-serif;
 }
 
+.stationery-pad.note-card--grid-garden .stationery-field__auto-punct {
+  color: #0e5be2;
+  font-family: var(--font-body), sans-serif;
+}
+
 .stationery-pad.note-card--grid-garden .stationery-field__input--body,
 .stationery-pad.note-card--grid-garden .stationery-field__input--valediction {
   color: #0e5be2;
@@ -285,12 +316,36 @@
 
 .stationery-pad.note-card--border-layered .stationery-pad__frame {
   background: var(--card-frame);
-  box-shadow: 0 8px 24px rgba(15, 47, 143, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 107, 192, 0.45);
 }
 
-.stationery-pad.note-card--border-layered .stationery-pad__surface {
-  background: var(--card-bg);
-  box-shadow: 0 0 0 3px var(--card-inner-line), 0 0 0 7px var(--card-inner-line-2);
+.stationery-pad.note-card--duck-pond .stationery-pad__frame {
+  height: auto;
+}
+
+.stationery-pad.note-card--duck-pond .stationery-pad__surface {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.stationery-pad.note-card--duck-pond .note-card__inner {
+  flex: 1;
+  width: 100%;
+  background-color: var(--card-bg);
+  background-image: url('/scallop-bg.svg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+}
+
+.stationery-pad.note-card--duck-pond .stationery-field--body {
+  flex: 0 1 auto;
+  min-height: auto;
+}
+
+.stationery-pad.note-card--duck-pond .stationery-field__body-wrap {
+  flex: 0 1 auto;
 }
 
 .stationery-pad.note-card--border-scalloped .stationery-pad__frame {
@@ -417,6 +472,81 @@
 .stationery-field__input::placeholder {
   color: var(--pad-muted);
   opacity: 0.65;
+}
+
+.stationery-field__decorated {
+  max-width: 100%;
+}
+
+.stationery-field__decorated--salutation {
+  display: inline-flex;
+  align-items: baseline;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.stationery-field__decorated--salutation .stationery-field__input--salutation {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 1ch;
+  field-sizing: content;
+}
+
+.stationery-field__decorated--salutation .stationery-field__auto-punct {
+  font-family: var(--font-salutation), cursive;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--pad-muted);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stationery-field__decorated--salutation:has(.stationery-field__input--salutation:not(:placeholder-shown))
+  .stationery-field__auto-punct {
+  opacity: 1;
+}
+
+.stationery-field__decorated--valediction {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.stationery-field__decorated-inner {
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+}
+
+.stationery-field__decorated--valediction .stationery-field__auto-punct--prefix {
+  font-family: var(--font-valediction), cursive;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--pad-muted);
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  margin-right: 0;
+}
+
+.stationery-field__decorated--valediction:focus-within .stationery-field__auto-punct--prefix,
+.stationery-field__decorated--valediction:has(.stationery-field__input--valediction:not(:placeholder-shown))
+  .stationery-field__auto-punct--prefix {
+  opacity: 1;
+  max-width: none;
+  margin-right: 4px;
+}
+
+.stationery-field__decorated--valediction .stationery-field__input--valediction {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 1ch;
+  field-sizing: content;
+  text-align: left;
 }
 
 .stationery-field__input--salutation {
