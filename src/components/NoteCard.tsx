@@ -1,5 +1,6 @@
 import type { NoteData } from '../types/note'
 import { getCardStyle } from '../data/cardStyles'
+import { formatSalutation, formatValediction } from '../lib/formatNoteFields'
 import { ParticleCanvas } from './ParticleCanvas'
 import './NoteCard.css'
 
@@ -47,7 +48,7 @@ export function NoteCard({ note, showParticles = true }: NoteCardProps) {
     >
       <div className="note-card__frame">
         {style.id === 'grid-garden' && note.salutation && (
-          <p className="note-card__salutation">{note.salutation}</p>
+          <p className="note-card__salutation">{formatSalutation(note.salutation)}</p>
         )}
 
         <div className={`note-card__surface ${surfaceClass(style)}`}>
@@ -63,7 +64,7 @@ export function NoteCard({ note, showParticles = true }: NoteCardProps) {
 
           <div className="note-card__inner">
             {style.id !== 'grid-garden' && note.salutation && (
-              <p className="note-card__salutation">{note.salutation}</p>
+              <p className="note-card__salutation">{formatSalutation(note.salutation)}</p>
             )}
             <div className="note-card__body-wrap">
               {note.body ? (
@@ -75,7 +76,7 @@ export function NoteCard({ note, showParticles = true }: NoteCardProps) {
               )}
             </div>
             {note.valediction && (
-              <p className="note-card__valediction">{note.valediction}</p>
+              <p className="note-card__valediction">{formatValediction(note.valediction)}</p>
             )}
           </div>
         </div>

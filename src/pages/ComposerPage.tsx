@@ -6,9 +6,60 @@ import { ANIMATIONS } from '../data/animations'
 import { NoteCard } from '../components/NoteCard'
 import { ShareModal } from '../components/ShareModal'
 import { noteShareUrl } from '../lib/encodeNote'
+import { formatSalutation, formatValediction, stripSalutationPunctuation, stripValedictionPunctuation } from '../lib/formatNoteFields'
 import './ComposerPage.css'
 
 const BODY_MAX = 150
+
+function DecoratedSalutationInput({
+  value,
+  onChange,
+}: {
+  value: string
+  onChange: (value: string) => void
+}) {
+  return (
+    <span className="stationery-field__decorated stationery-field__decorated--salutation">
+      <input
+        type="text"
+        className="stationery-field__input stationery-field__input--salutation"
+        placeholder="dear my little duck prince"
+        value={value}
+        onChange={(e) => onChange(stripSalutationPunctuation(e.target.value))}
+        maxLength={80}
+      />
+      <span className="stationery-field__auto-punct" aria-hidden="true">
+        ,
+      </span>
+    </span>
+  )
+}
+
+function DecoratedValedictionInput({
+  value,
+  onChange,
+}: {
+  value: string
+  onChange: (value: string) => void
+}) {
+  return (
+    <span className="stationery-field__decorated stationery-field__decorated--valediction">
+      <span className="stationery-field__decorated-inner">
+        <span className="stationery-field__auto-punct stationery-field__auto-punct--prefix" aria-hidden="true">
+          –
+        </span>
+        <input
+          type="text"
+          className="stationery-field__input stationery-field__input--valediction"
+          placeholder="your little ketchup packet"
+          value={value}
+          onChange={(e) => onChange(stripValedictionPunctuation(e.target.value))}
+          maxLength={80}
+        />
+      </span>
+    </span>
+  )
+}
 
 export function ComposerPage() {
   const [note, setNote] = useState<NoteData>(EMPTY_NOTE)
@@ -32,7 +83,13 @@ export function ComposerPage() {
 
   const send = () => {
     if (!canSend) return
-    setShareUrl(noteShareUrl(note))
+    setShareUrl(
+      noteShareUrl({
+        ...note,
+        salutation: formatSalutation(note.salutation),
+        valediction: formatValediction(note.valediction),
+      }),
+    )
     setPreviewing(false)
   }
 
@@ -107,13 +164,9 @@ export function ComposerPage() {
               {style.id === 'grid-garden' && (
                 <label className="stationery-field stationery-field--salutation">
                   <span className="visually-hidden">Salutation</span>
-                  <input
-                    type="text"
-                    className="stationery-field__input stationery-field__input--salutation"
-                    placeholder="dear my little duck prince,"
+                  <DecoratedSalutationInput
                     value={note.salutation}
-                    onChange={(e) => update({ salutation: e.target.value })}
-                    maxLength={80}
+                    onChange={(salutation) => update({ salutation })}
                   />
                 </label>
               )}
@@ -134,13 +187,9 @@ export function ComposerPage() {
                 {style.id !== 'grid-garden' && (
                   <label className="stationery-field">
                     <span className="visually-hidden">Salutation</span>
-                    <input
-                      type="text"
-                      className="stationery-field__input stationery-field__input--salutation"
-                      placeholder="dear my little duck prince,"
+                    <DecoratedSalutationInput
                       value={note.salutation}
-                      onChange={(e) => update({ salutation: e.target.value })}
-                      maxLength={80}
+                      onChange={(salutation) => update({ salutation })}
                     />
                   </label>
                 )}
@@ -164,13 +213,9 @@ export function ComposerPage() {
 
             <label className="stationery-field">
               <span className="visually-hidden">Valediction</span>
-              <input
-                type="text"
-                className="stationery-field__input stationery-field__input--valediction"
-                placeholder="– your little ketchup packet"
+              <DecoratedValedictionInput
                 value={note.valediction}
-                onChange={(e) => update({ valediction: e.target.value })}
-                maxLength={80}
+                onChange={(valediction) => update({ valediction })}
               />
             </label>
               </div>
