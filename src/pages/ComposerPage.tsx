@@ -101,6 +101,7 @@ export function ComposerPage() {
       </header>
 
       <main className="composer__main">
+        <div className="composer__steps">
         {/* Step 1: Card style */}
         <section className="composer__section">
           <h2 className="composer__section-title">
@@ -119,6 +120,7 @@ export function ComposerPage() {
                   {
                     '--swatch-layer': s.colors.bgPattern ?? s.colors.bg,
                     '--swatch-border': s.colors.border,
+                    '--swatch-text': s.colors.text,
                   } as React.CSSProperties
                 }
               >
@@ -256,14 +258,14 @@ export function ComposerPage() {
             ))}
           </div>
         </section>
+        </div>
 
-        {/* Live mini preview */}
-        <section className="composer__section composer__section--preview-mini">
+        <aside className="composer__preview-column" aria-label="Live preview">
           <h2 className="composer__section-title">Live preview</h2>
           <div className="composer__card-wrap">
             <NoteCard note={note} showParticles />
           </div>
-        </section>
+        </aside>
       </main>
 
       <footer className="composer__footer">

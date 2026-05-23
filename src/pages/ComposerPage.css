@@ -28,10 +28,40 @@
 
 .composer__main {
   flex: 1;
-  max-width: 520px;
   width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.25rem 6rem;
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr;
+}
+
+.composer__steps .composer__section:last-child {
+  margin-bottom: 0;
+}
+
+.composer__preview-column {
+  width: 100%;
+  min-width: 0;
+}
+
+.composer__preview-column .composer__card-wrap {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .composer__main {
+    grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .composer__preview-column {
+    position: sticky;
+    top: 1.5rem;
+    align-self: center;
+  }
 }
 
 .composer__section {
@@ -62,22 +92,17 @@
 }
 
 .style-picker {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.65rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
 }
 
 .style-picker__item {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
-  width: 88px;
+  width: auto;
   padding: 0.75rem 0.5rem;
   border: 2px solid transparent;
   border-radius: 10px;
@@ -100,12 +125,13 @@
 .style-picker__motif {
   font-size: 1.25rem;
   line-height: 1;
+  color: var(--swatch-text, #4a3040);
 }
 
 .style-picker__name {
   font-family: 'Itim', cursive;
   font-size: 0.7rem;
-  color: #4a3040;
+  color: var(--swatch-text, #4a3040);
   text-align: center;
   line-height: 1.2;
 }
@@ -117,6 +143,10 @@
 }
 
 @media (max-width: 380px) {
+  .style-picker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .animation-picker {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -614,11 +644,6 @@
   margin-top: 0.25rem;
 }
 
-.composer__section--preview-mini .composer__card-wrap {
-  width: 100%;
-  padding: 0.5rem 0;
-}
-
 .composer__footer {
   position: fixed;
   bottom: 0;
@@ -630,7 +655,7 @@
   background: rgba(253, 246, 248, 0.92);
   backdrop-filter: blur(12px);
   border-top: 1px solid rgba(232, 200, 216, 0.5);
-  max-width: 520px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
