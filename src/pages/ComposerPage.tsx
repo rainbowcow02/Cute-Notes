@@ -154,12 +154,16 @@ export function ComposerPage() {
                 onClick={() => selectStyle(s.id)}
                 style={
                   {
-                    '--swatch-layer': s.colors.bgPattern ?? s.colors.bg,
+                    '--swatch-bg': s.colors.bg,
+                    '--swatch-layer': s.colors.bgPattern
+                      ? `${s.colors.bgPattern}${s.colors.bg.startsWith('linear-gradient') ? `, ${s.colors.bg}` : ''}`
+                      : s.colors.bg,
                     '--swatch-border': s.colors.border,
                     '--swatch-text': s.colors.text,
                   } as React.CSSProperties
                 }
               >
+                <span className="style-picker__tab" aria-hidden="true" />
                 <span className="style-picker__motif">{s.motif}</span>
                 <span className="style-picker__name">{s.name}</span>
               </button>
