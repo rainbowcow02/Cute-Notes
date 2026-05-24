@@ -329,7 +329,11 @@ export function ComposerPage() {
       {previewing && (
         <div className="preview-overlay" role="dialog" aria-modal="true" aria-label="Preview">
           <div className="preview-overlay__inner">
-            <p className="preview-overlay__label">A glimpse through the star haze</p>
+            <h2 className="preview-overlay__label">
+              <span className="preview-overlay__label-star" aria-hidden="true">✦</span>
+              Note preview
+              <span className="preview-overlay__label-star" aria-hidden="true">✦</span>
+            </h2>
             <NoteCard note={note} showParticles />
             <div className="preview-overlay__actions">
               <button type="button" className="composer__btn composer__btn--secondary" onClick={() => setPreviewing(false)}>

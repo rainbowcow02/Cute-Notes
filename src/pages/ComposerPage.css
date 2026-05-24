@@ -1281,13 +1281,24 @@
 }
 
 .preview-overlay__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
   font-family: 'Jersey 15', sans-serif;
+  font-weight: 400;
   color: var(--dream-text);
   margin: 0 0 1.25rem;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.preview-overlay__label-star {
+  color: var(--dream-lilac);
+  font-size: 0.7rem;
+  text-shadow: 0 0 8px rgba(196, 168, 224, 0.5);
 }
 
 .preview-overlay__actions {
