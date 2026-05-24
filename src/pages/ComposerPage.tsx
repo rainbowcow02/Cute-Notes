@@ -158,7 +158,7 @@ export function ComposerPage() {
                       ? `${s.colors.bgPattern}${s.colors.bg.startsWith('linear-gradient') ? `, ${s.colors.bg}` : ''}`
                       : s.colors.bg,
                     '--swatch-border': s.colors.border,
-                    '--swatch-text': s.colors.text,
+                    '--swatch-text': s.colors.swatchLabel ?? s.colors.text,
                   } as React.CSSProperties
                 }
               >

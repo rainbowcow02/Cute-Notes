@@ -34,6 +34,7 @@ export interface CardStyle {
     text: string
     textMuted: string
     ink: string
+    swatchLabel?: string
   }
   envelope: {
     outer: string
@@ -104,6 +105,7 @@ export const CARD_STYLES: CardStyle[] = [
       text: 'hsla(338, 91%, 53%, 1)',
       textMuted: 'hsla(338, 91%, 53%, 1)',
       ink: 'hsla(338, 91%, 53%, 1)',
+      swatchLabel: '#ffffff',
     },
     envelope: {
       outer: '#153db8',
@@ -246,6 +248,7 @@ export const CARD_STYLES: CardStyle[] = [
       text: '#ffffff',
       textMuted: '#fff8fc',
       ink: '#ffffff',
+      swatchLabel: '#2a1040',
     },
     envelope: {
       outer: '#ff2d8a',
