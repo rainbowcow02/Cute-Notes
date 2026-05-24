@@ -65,14 +65,23 @@
   color: var(--card-ink);
 }
 
-.note-card__salutation {
+.note-card__salutation,
+.note-card__valediction {
   font-family: var(--font-salutation), cursive;
   font-size: 1.5rem;
-  line-height: 1.2;
-  margin: 0 0 0.5rem;
+  line-height: 1.45;
   color: var(--card-text-muted);
-  text-align: left;
   flex-shrink: 0;
+}
+
+.note-card__salutation {
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+.note-card__valediction {
+  margin: 0.5rem 0 0;
+  text-align: right;
 }
 
 .note-card__body-wrap {
@@ -98,16 +107,6 @@
 .note-card__placeholder {
   opacity: 0.45;
   font-style: italic;
-}
-
-.note-card__valediction {
-  font-family: var(--font-valediction), cursive;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  margin: 0.5rem 0 0;
-  color: var(--card-text-muted);
-  text-align: right;
-  flex-shrink: 0;
 }
 
 /* ── Grid Garden: soft mint frame + graph paper ── */

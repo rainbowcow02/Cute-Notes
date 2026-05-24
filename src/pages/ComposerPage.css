@@ -824,9 +824,7 @@
 }
 
 .stationery-pad.note-card--grid-garden .stationery-field__input--salutation {
-  padding: 0;
-  line-height: 1.2;
-  height: 1.2em;
+  padding: 0 0 0.12em;
   color: #0e5be2;
   font-family: var(--font-body), sans-serif;
 }
@@ -1035,6 +1033,7 @@
   align-items: baseline;
   width: fit-content;
   max-width: 100%;
+  line-height: 1.45;
 }
 
 .stationery-field__decorated--salutation .stationery-field__input--salutation {
@@ -1047,7 +1046,7 @@
 .stationery-field__decorated--salutation .stationery-field__auto-punct {
   font-family: var(--font-salutation), cursive;
   font-size: 1.5rem;
-  line-height: 1.2;
+  line-height: inherit;
   color: var(--pad-muted);
   opacity: 0;
   pointer-events: none;
@@ -1069,12 +1068,13 @@
   display: inline-flex;
   align-items: baseline;
   max-width: 100%;
+  line-height: 1.45;
 }
 
 .stationery-field__decorated--valediction .stationery-field__auto-punct--prefix {
-  font-family: var(--font-valediction), cursive;
+  font-family: var(--font-salutation), cursive;
   font-size: 1.5rem;
-  line-height: 1.2;
+  line-height: inherit;
   color: var(--pad-muted);
   opacity: 0;
   max-width: 0;
@@ -1108,14 +1108,19 @@
   text-align: left;
 }
 
-.stationery-field__input--salutation {
+.stationery-field__input--salutation,
+.stationery-field__input--valediction {
   font-family: var(--font-salutation), cursive;
   font-size: 1.5rem;
-  line-height: 1.2;
-  height: 1.2em;
-  padding: 0;
-  text-align: left;
+  line-height: inherit;
+  height: auto;
+  min-height: 0;
+  padding: 0 0 0.12em;
   color: var(--pad-muted);
+}
+
+.stationery-field__input--salutation {
+  text-align: left;
 }
 
 .stationery-field__input--salutation:focus-visible {
@@ -1141,13 +1146,7 @@
 }
 
 .stationery-field__input--valediction {
-  font-family: var(--font-valediction), cursive;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  height: 1.2em;
-  padding: 0;
-  text-align: right;
-  color: var(--pad-muted);
+  text-align: left;
 }
 
 .stationery-pad.note-card--y2k-candy .stationery-field__input--body,

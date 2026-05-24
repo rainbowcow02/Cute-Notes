@@ -132,7 +132,7 @@ export const CARD_STYLES: CardStyle[] = [
       frameRadius: 20,
       surfaceRadius: 255,
     },
-    fonts: { salutation: 'Kurale', body: 'Kurale', valediction: 'Itim' },
+    fonts: { salutation: 'Kurale', body: 'Kurale', valediction: 'Kurale' },
     colors: {
       bg: 'linear-gradient(165deg, #fce8ef 0%, #e8f0e4 55%, #faf6f8 100%)',
       accent: '#e8a0b4',

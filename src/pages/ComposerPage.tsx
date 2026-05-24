@@ -16,8 +16,7 @@ const EXPLORATION_DEMO: NoteData = {
   styleId: 'sakura-cloud',
   animationId: 'cherry-blossoms',
   salutation: 'dear my little duck prince',
-  body:
-    'Drifting through a soft pink sky tonight, thinking of you — hope this note lands like a cherry blossom, all gentle and impossibly bright. ✨',
+  body: '',
   valediction: 'your little ketchup packet',
 }
 
