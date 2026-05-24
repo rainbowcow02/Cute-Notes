@@ -107,7 +107,6 @@ export function ComposerPage() {
     <div className="composer">
       <div className="composer__ambient" aria-hidden="true">
         <div className="composer__stars" />
-        <div className="composer__clouds composer__clouds--sky" />
         <div className="composer__cloud-field">
           <span className="composer__cloud-puff composer__cloud-puff--1" />
           <span className="composer__cloud-puff composer__cloud-puff--2" />
