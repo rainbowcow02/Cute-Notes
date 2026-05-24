@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { getCanvasDpr, isMobileViewport, scaleParticleCount } from '../lib/performance'
 import type { AnimationId } from '../types/note'
 import blossom1 from '../../assets/cblossom-1.svg'
 import blossom2 from '../../assets/cblossom-2.svg'
@@ -125,11 +126,11 @@ const CHERRY_BLOSSOM_COUNT = 12
 const DUCK_COUNT = 5
 
 function getParticleCount(id: AnimationId): number {
-  if (id === 'stars') return STAR_COUNT
-  if (id === 'cherry-blossoms') return CHERRY_BLOSSOM_COUNT
-  if (id === 'ducks') return DUCK_COUNT
+  if (id === 'stars') return scaleParticleCount(STAR_COUNT)
+  if (id === 'cherry-blossoms') return scaleParticleCount(CHERRY_BLOSSOM_COUNT)
+  if (id === 'ducks') return scaleParticleCount(DUCK_COUNT)
   if (id === 'rainbow-confetti') return 0
-  return COUNT
+  return scaleParticleCount(COUNT)
 }
 
 function pickConfettiOrigin(exclude: ConfettiOrigin[] = []): ConfettiOrigin {
@@ -235,7 +236,9 @@ function createConfettiBurstParticle(w: number, h: number, origin: ConfettiOrigi
 }
 
 function spawnConfettiBurst(particles: Particle[], w: number, h: number, origin: ConfettiOrigin) {
-  const count = Math.floor(randomBetween(18, 30))
+  const min = isMobileViewport() ? 12 : 18
+  const max = isMobileViewport() ? 20 : 30
+  const count = Math.floor(randomBetween(min, max))
   for (let i = 0; i < count; i++) {
     particles.push(createConfettiBurstParticle(w, h, origin))
   }
@@ -246,10 +249,11 @@ function randomBetween(min: number, max: number) {
 }
 
 function createDuckParticle(w: number, h: number, laneIndex?: number): Particle {
-  const lane = laneIndex ?? Math.floor(randomBetween(0, DUCK_COUNT))
+  const duckCount = scaleParticleCount(DUCK_COUNT)
+  const lane = laneIndex ?? Math.floor(randomBetween(0, duckCount))
   const direction = Math.random() < 0.5 ? -1 : 1
   const laneY =
-    h * (0.34 + (lane / Math.max(1, DUCK_COUNT - 1)) * 0.38) + randomBetween(-6, 6)
+    h * (0.34 + (lane / Math.max(1, duckCount - 1)) * 0.38) + randomBetween(-6, 6)
 
   return {
     x: direction > 0 ? randomBetween(-w * 0.2, w * 0.45) : randomBetween(w * 0.55, w * 1.2),
@@ -475,6 +479,10 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
   const particlesRef = useRef<Particle[]>([])
   const confettiStateRef = useRef<ConfettiState>(createConfettiState())
   const frameRef = useRef<number>(0)
+  const activeRef = useRef(active)
+  const syncLoopRef = useRef<(() => void) | null>(null)
+
+  activeRef.current = active
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -483,10 +491,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    let dpr = getCanvasDpr()
+
     const resize = () => {
       const parent = canvas.parentElement
       if (!parent) return
-      const dpr = window.devicePixelRatio || 1
+      dpr = getCanvasDpr()
       const { width, height } = parent.getBoundingClientRect()
       canvas.width = width * dpr
       canvas.height = height * dpr
@@ -495,9 +505,10 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       particlesRef.current =
         animationId === 'ducks'
-          ? Array.from({ length: DUCK_COUNT }, (_, i) => {
+          ? Array.from({ length: getParticleCount('ducks') }, (_, i) => {
+              const duckCount = getParticleCount('ducks')
               const duck = createDuckParticle(width, height, i)
-              duck.x = ((i + 0.5) / DUCK_COUNT) * width + randomBetween(-24, 24)
+              duck.x = ((i + 0.5) / duckCount) * width + randomBetween(-24, 24)
               return duck
             })
           : Array.from({ length: getParticleCount(animationId) }, () =>
@@ -511,14 +522,23 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
     resize()
     window.addEventListener('resize', resize)
 
+    const shouldRun = () => activeRef.current && document.visibilityState === 'visible'
+
+    const stopLoop = () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current)
+        frameRef.current = 0
+      }
+    }
+
     const tick = () => {
-      if (!active) {
-        frameRef.current = requestAnimationFrame(tick)
+      if (!shouldRun()) {
+        frameRef.current = 0
         return
       }
 
-      const w = canvas.width / (window.devicePixelRatio || 1)
-      const h = canvas.height / (window.devicePixelRatio || 1)
+      const w = canvas.width / dpr
+      const h = canvas.height / dpr
       ctx.clearRect(0, 0, w, h)
 
       if (animationId === 'rainbow-confetti') {
@@ -603,13 +623,31 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       frameRef.current = requestAnimationFrame(tick)
     }
 
-    frameRef.current = requestAnimationFrame(tick)
+    const startLoop = () => {
+      if (frameRef.current || !shouldRun()) return
+      frameRef.current = requestAnimationFrame(tick)
+    }
+
+    const syncLoop = () => {
+      if (shouldRun()) startLoop()
+      else stopLoop()
+    }
+
+    document.addEventListener('visibilitychange', syncLoop)
+    syncLoopRef.current = syncLoop
+    syncLoop()
 
     return () => {
       window.removeEventListener('resize', resize)
-      cancelAnimationFrame(frameRef.current)
+      document.removeEventListener('visibilitychange', syncLoop)
+      syncLoopRef.current = null
+      stopLoop()
     }
-  }, [animationId, active])
+  }, [animationId])
+
+  useEffect(() => {
+    syncLoopRef.current?.()
+  }, [active])
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />
 }

@@ -9,7 +9,12 @@
   --dream-chrome-light: #ffffff;
   --dream-chrome-mid: #e8dff8;
   --dream-chrome-dark: #b89ad0;
-  --dream-glass: rgba(255, 255, 255, 0.52);
+  --dream-glass: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 250, 252, 0.86) 48%,
+    rgba(248, 242, 255, 0.9) 100%
+  );
   --dream-glass-border: rgba(255, 255, 255, 0.82);
   --dream-text: #6a5080;
   --dream-text-muted: rgba(106, 80, 128, 0.72);
@@ -51,22 +56,10 @@
   background-image:
     radial-gradient(circle 5px at 12% 10%, rgba(255, 255, 255, 0.98) 0%, transparent 68%),
     radial-gradient(circle 20px at 12% 10%, rgba(255, 255, 255, 0.42) 0%, transparent 72%),
-    radial-gradient(circle 5px at 28% 7%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
-    radial-gradient(circle 22px at 28% 7%, rgba(255, 252, 255, 0.38) 0%, transparent 72%),
-    radial-gradient(circle 4.5px at 44% 12%, rgba(255, 255, 255, 0.92) 0%, transparent 65%),
-    radial-gradient(circle 18px at 44% 12%, rgba(252, 250, 255, 0.36) 0%, transparent 70%),
-    radial-gradient(circle 6px at 58% 8%, rgba(255, 255, 255, 0.96) 0%, transparent 68%),
-    radial-gradient(circle 24px at 58% 8%, rgba(255, 252, 255, 0.4) 0%, transparent 72%),
-    radial-gradient(circle 5px at 72% 11%, rgba(255, 255, 255, 0.94) 0%, transparent 68%),
-    radial-gradient(circle 20px at 72% 11%, rgba(255, 255, 255, 0.38) 0%, transparent 72%),
-    radial-gradient(circle 5px at 86% 9%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
-    radial-gradient(circle 22px at 86% 9%, rgba(255, 252, 255, 0.36) 0%, transparent 72%),
     radial-gradient(circle 6.5px at 50% 5%, rgba(255, 255, 255, 0.98) 0%, transparent 70%),
     radial-gradient(circle 26px at 50% 5%, rgba(255, 255, 255, 0.45) 0%, transparent 70%),
-    radial-gradient(circle 5px at 38% 4%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
-    radial-gradient(circle 18px at 38% 4%, rgba(255, 252, 255, 0.34) 0%, transparent 72%),
-    radial-gradient(circle 5px at 62% 4%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
-    radial-gradient(circle 18px at 62% 4%, rgba(252, 250, 255, 0.32) 0%, transparent 72%),
+    radial-gradient(circle 5px at 86% 9%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
+    radial-gradient(circle 22px at 86% 9%, rgba(255, 252, 255, 0.36) 0%, transparent 72%),
     radial-gradient(circle 4.5px at 18% 42%, rgba(255, 255, 255, 0.82) 0%, transparent 65%),
     radial-gradient(circle 17px at 18% 42%, rgba(255, 255, 255, 0.3) 0%, transparent 72%),
     radial-gradient(circle 4.5px at 62% 40%, rgba(255, 255, 255, 0.78) 0%, transparent 65%),
@@ -264,17 +257,90 @@
 }
 
 @media (max-width: 767px) {
-  .composer__cloud-puff--1,
-  .composer__cloud-puff--3,
-  .composer__cloud-puff--5 {
-    transform: scale(0.75);
-  }
-
+  /* Fewer moving clouds: keep two bottom puffs, drop the rest */
+  .composer__cloud-puff--2,
+  .composer__cloud-puff--4,
+  .composer__cloud-puff--5,
+  .composer__cloud-puff--6,
+  .composer__cloud-puff--7,
+  .composer__cloud-puff--8,
   .composer__cloud-puff--9,
   .composer__cloud-puff--10,
   .composer__cloud-puff--11,
-  .composer__cloud-puff--12 {
-    opacity: 0.65;
+  .composer__cloud-puff--12,
+  .composer__cloud-puff--13,
+  .composer__cloud-puff--14 {
+    display: none;
+  }
+
+  .composer__cloud-puff--1,
+  .composer__cloud-puff--3 {
+    will-change: auto;
+    transform: scale(0.85);
+  }
+
+  /* Horizon layer stays as soft fill; skip drift animation on mobile */
+  .composer__clouds--horizon {
+    animation: none;
+  }
+
+  /* Fewer twinkling stars with cheaper opacity-only pulse */
+  .composer__stars {
+    background-image:
+      radial-gradient(circle 5px at 50% 6%, rgba(255, 255, 255, 0.98) 0%, transparent 70%),
+      radial-gradient(circle 26px at 50% 6%, rgba(255, 255, 255, 0.45) 0%, transparent 70%),
+      radial-gradient(circle 4.5px at 28% 38%, rgba(255, 255, 255, 0.82) 0%, transparent 65%),
+      radial-gradient(circle 17px at 28% 38%, rgba(255, 255, 255, 0.3) 0%, transparent 72%);
+    animation: dream-stars-twinkle-lite 5.5s ease-in-out infinite alternate;
+  }
+
+  /* Faux frosted panels — opaque tint instead of live backdrop blur */
+  .composer__steps .composer__section {
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 248, 252, 0.9) 50%,
+      rgba(246, 238, 255, 0.92) 100%
+    );
+  }
+
+  .composer__footer {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 248, 252, 0) 0%,
+      rgba(255, 246, 252, 0.97) 18%,
+      rgba(252, 240, 248, 0.98) 100%
+    );
+  }
+
+  .preview-overlay {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(240, 210, 255, 0.35) 0%, transparent 60%),
+      rgba(252, 240, 248, 0.94);
+  }
+
+  /* Drop the full-screen glitter overlay; stars + logo sparkles are enough */
+  .composer__glitter {
+    display: none;
+  }
+
+  /* Header sparkle duplicate removed on mobile */
+  .composer__header::before {
+    display: none;
+  }
+
+  /* Fewer logo sparkles, opacity-only twinkle */
+  .composer__logo-sparkles {
+    background-image:
+      radial-gradient(circle 6px at 50% 72%, rgba(255, 255, 255, 0.98) 0%, transparent 68%),
+      radial-gradient(ellipse 2px 22px at 50% 72%, rgba(255, 255, 255, 0.82) 0%, transparent 72%),
+      radial-gradient(ellipse 22px 2px at 50% 72%, rgba(255, 255, 255, 0.82) 0%, transparent 72%),
+      radial-gradient(circle 28px at 50% 72%, rgba(255, 255, 255, 0.45) 0%, transparent 72%),
+      radial-gradient(circle 5px at 28% 58%, rgba(255, 255, 255, 0.94) 0%, transparent 68%),
+      radial-gradient(circle 20px at 28% 58%, rgba(255, 252, 255, 0.38) 0%, transparent 72%),
+      radial-gradient(circle 5px at 72% 62%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
+      radial-gradient(circle 20px at 72% 62%, rgba(252, 250, 255, 0.36) 0%, transparent 72%);
+    animation: dream-logo-sparkle-lite 4s ease-in-out infinite;
   }
 
   .composer__header {
@@ -459,7 +525,6 @@
   border-radius: 24px 24px 24px 8px;
   background: var(--dream-glass);
   border: 1px solid var(--dream-glass-border);
-  backdrop-filter: blur(20px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
     0 8px 32px rgba(180, 150, 210, 0.12),
@@ -1219,10 +1284,9 @@
   background: linear-gradient(
     180deg,
     rgba(255, 248, 252, 0) 0%,
-    rgba(255, 248, 252, 0.82) 28%,
-    rgba(252, 240, 248, 0.92) 100%
+    rgba(255, 246, 252, 0.94) 24%,
+    rgba(252, 240, 248, 0.96) 100%
   );
-  backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.65);
   max-width: 1100px;
   margin: 0 auto;
@@ -1299,9 +1363,8 @@
   inset: 0;
   z-index: 50;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(240, 210, 255, 0.45) 0%, transparent 60%),
-    rgba(252, 240, 248, 0.72);
-  backdrop-filter: blur(10px);
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(240, 210, 255, 0.4) 0%, transparent 60%),
+    rgba(252, 240, 248, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1346,6 +1409,28 @@
 .preview-overlay__actions .composer__btn {
   flex: 0 1 auto;
   min-width: 120px;
+}
+
+@keyframes dream-stars-twinkle-lite {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dream-logo-sparkle-lite {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: translateX(-50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes dream-stars-twinkle {
