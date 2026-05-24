@@ -132,7 +132,7 @@ export function ComposerPage() {
           <span className="composer__logo-halo" aria-hidden="true" />
           <h1 className="composer__logo">Cute Notes</h1>
         </div>
-        <p className="composer__tagline">Float a wish into someone&apos;s sky</p>
+        <p className="composer__tagline">Float a note into someone&apos;s sky</p>
       </header>
 
       <main className="composer__main">
