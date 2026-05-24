@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { getCanvasDpr, getCanvasTargetFps, isMobileViewport, scaleParticleCount } from '../lib/performance'
 import type { AnimationId } from '../types/note'
 import blossom1 from '../../assets/cblossom-1.svg'
 import blossom2 from '../../assets/cblossom-2.svg'
@@ -125,11 +126,11 @@ const CHERRY_BLOSSOM_COUNT = 12
 const DUCK_COUNT = 5
 
 function getParticleCount(id: AnimationId): number {
-  if (id === 'stars') return STAR_COUNT
-  if (id === 'cherry-blossoms') return CHERRY_BLOSSOM_COUNT
-  if (id === 'ducks') return DUCK_COUNT
+  if (id === 'stars') return scaleParticleCount(STAR_COUNT)
+  if (id === 'cherry-blossoms') return scaleParticleCount(CHERRY_BLOSSOM_COUNT)
+  if (id === 'ducks') return scaleParticleCount(DUCK_COUNT)
   if (id === 'rainbow-confetti') return 0
-  return COUNT
+  return scaleParticleCount(COUNT)
 }
 
 function pickConfettiOrigin(exclude: ConfettiOrigin[] = []): ConfettiOrigin {
@@ -235,7 +236,9 @@ function createConfettiBurstParticle(w: number, h: number, origin: ConfettiOrigi
 }
 
 function spawnConfettiBurst(particles: Particle[], w: number, h: number, origin: ConfettiOrigin) {
-  const count = Math.floor(randomBetween(18, 30))
+  const min = isMobileViewport() ? 12 : 18
+  const max = isMobileViewport() ? 20 : 30
+  const count = Math.floor(randomBetween(min, max))
   for (let i = 0; i < count; i++) {
     particles.push(createConfettiBurstParticle(w, h, origin))
   }
@@ -246,10 +249,11 @@ function randomBetween(min: number, max: number) {
 }
 
 function createDuckParticle(w: number, h: number, laneIndex?: number): Particle {
-  const lane = laneIndex ?? Math.floor(randomBetween(0, DUCK_COUNT))
+  const duckCount = scaleParticleCount(DUCK_COUNT)
+  const lane = laneIndex ?? Math.floor(randomBetween(0, duckCount))
   const direction = Math.random() < 0.5 ? -1 : 1
   const laneY =
-    h * (0.34 + (lane / Math.max(1, DUCK_COUNT - 1)) * 0.38) + randomBetween(-6, 6)
+    h * (0.34 + (lane / Math.max(1, duckCount - 1)) * 0.38) + randomBetween(-6, 6)
 
   return {
     x: direction > 0 ? randomBetween(-w * 0.2, w * 0.45) : randomBetween(w * 0.55, w * 1.2),
@@ -475,6 +479,10 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
   const particlesRef = useRef<Particle[]>([])
   const confettiStateRef = useRef<ConfettiState>(createConfettiState())
   const frameRef = useRef<number>(0)
+  const activeRef = useRef(active)
+  const syncLoopRef = useRef<(() => void) | null>(null)
+
+  activeRef.current = active
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -483,10 +491,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    let dpr = getCanvasDpr()
+
     const resize = () => {
       const parent = canvas.parentElement
       if (!parent) return
-      const dpr = window.devicePixelRatio || 1
+      dpr = getCanvasDpr()
       const { width, height } = parent.getBoundingClientRect()
       canvas.width = width * dpr
       canvas.height = height * dpr
@@ -495,9 +505,10 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       particlesRef.current =
         animationId === 'ducks'
-          ? Array.from({ length: DUCK_COUNT }, (_, i) => {
+          ? Array.from({ length: getParticleCount('ducks') }, (_, i) => {
+              const duckCount = getParticleCount('ducks')
               const duck = createDuckParticle(width, height, i)
-              duck.x = ((i + 0.5) / DUCK_COUNT) * width + randomBetween(-24, 24)
+              duck.x = ((i + 0.5) / duckCount) * width + randomBetween(-24, 24)
               return duck
             })
           : Array.from({ length: getParticleCount(animationId) }, () =>
@@ -511,20 +522,40 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
     resize()
     window.addEventListener('resize', resize)
 
-    const tick = () => {
-      if (!active) {
+    const shouldRun = () => activeRef.current && document.visibilityState === 'visible'
+
+    const stopLoop = () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current)
+        frameRef.current = 0
+      }
+    }
+
+    const frameInterval = 1000 / getCanvasTargetFps()
+    let lastDrawTime = 0
+
+    const tick = (now: number) => {
+      if (!shouldRun()) {
+        frameRef.current = 0
+        return
+      }
+
+      if (lastDrawTime > 0 && now - lastDrawTime < frameInterval) {
         frameRef.current = requestAnimationFrame(tick)
         return
       }
 
-      const w = canvas.width / (window.devicePixelRatio || 1)
-      const h = canvas.height / (window.devicePixelRatio || 1)
+      const delta = lastDrawTime > 0 ? Math.min(2.5, (now - lastDrawTime) / (1000 / 60)) : 1
+      lastDrawTime = now
+
+      const w = canvas.width / dpr
+      const h = canvas.height / dpr
       ctx.clearRect(0, 0, w, h)
 
       if (animationId === 'rainbow-confetti') {
         const confetti = confettiStateRef.current
         confetti.scheduled = confetti.scheduled.filter((pop) => {
-          pop.framesUntil -= 1
+          pop.framesUntil -= delta
           if (pop.framesUntil > 0) return true
           spawnConfettiBurst(particlesRef.current, w, h, pop.origin)
           return false
@@ -534,12 +565,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
         }
 
         particlesRef.current = particlesRef.current.filter((p) => {
-          p.life = (p.life ?? 0) + 1
-          p.vy += p.gravity ?? 0.12
-          p.vx *= 0.992
-          p.x += p.vx
-          p.y += p.vy
-          p.rotation += p.vr
+          p.life = (p.life ?? 0) + delta
+          p.vy += (p.gravity ?? 0.12) * delta
+          p.vx *= 0.992 ** delta
+          p.x += p.vx * delta
+          p.y += p.vy * delta
+          p.rotation += p.vr * delta
           const maxLife = p.maxLife ?? 120
           p.opacity = Math.max(0, 1 - (p.life / maxLife) ** 1.4)
 
@@ -552,7 +583,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       } else {
         particlesRef.current.forEach((p) => {
         if (animationId === 'ducks') {
-          p.life = (p.life ?? 0) + (p.pathSpeed ?? 0.012)
+          p.life = (p.life ?? 0) + (p.pathSpeed ?? 0.012) * delta
           const t = p.life + (p.pathOffset ?? 0)
           const waveFreqY = p.waveFreqY ?? 0.55
           const waveAmpY = p.waveAmpY ?? 8
@@ -560,7 +591,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
           const waveAmpX = p.waveAmpX ?? 0.1
 
           const meanderX = Math.sin(t * waveFreqX) * waveAmpX
-          p.x += (p.vx ?? 0) + meanderX
+          p.x += ((p.vx ?? 0) + meanderX) * delta
           p.y =
             (p.baseY ?? p.y) +
             Math.sin(t * waveFreqY) * waveAmpY +
@@ -575,12 +606,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
             p.x = dir > 0 ? -margin : w + margin
           }
         } else {
-          p.x += p.vx
-          p.y += p.vy
-          p.rotation += p.vr
+          p.x += p.vx * delta
+          p.y += p.vy * delta
+          p.rotation += p.vr * delta
 
           if (animationId === 'fireflies') {
-            p.life = (p.life ?? 0) + 1
+            p.life = (p.life ?? 0) + delta
             p.opacity = 0.15 + Math.abs(Math.sin(p.life * 0.05)) * 0.75
           }
           if (animationId === 'sparkles') {
@@ -603,13 +634,31 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       frameRef.current = requestAnimationFrame(tick)
     }
 
-    frameRef.current = requestAnimationFrame(tick)
+    const startLoop = () => {
+      if (frameRef.current || !shouldRun()) return
+      frameRef.current = requestAnimationFrame(tick)
+    }
+
+    const syncLoop = () => {
+      if (shouldRun()) startLoop()
+      else stopLoop()
+    }
+
+    document.addEventListener('visibilitychange', syncLoop)
+    syncLoopRef.current = syncLoop
+    syncLoop()
 
     return () => {
       window.removeEventListener('resize', resize)
-      cancelAnimationFrame(frameRef.current)
+      document.removeEventListener('visibilitychange', syncLoop)
+      syncLoopRef.current = null
+      stopLoop()
     }
-  }, [animationId, active])
+  }, [animationId])
+
+  useEffect(() => {
+    syncLoopRef.current?.()
+  }, [active])
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />
 }
