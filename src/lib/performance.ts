@@ -16,3 +16,8 @@ export function getCanvasDpr(): number {
   const dpr = window.devicePixelRatio || 1
   return Math.min(dpr, isMobileViewport() ? 1.5 : 2)
 }
+
+/** Target animation frame rate for canvas particle loops. */
+export function getCanvasTargetFps(): number {
+  return isMobileViewport() ? 30 : 60
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { getCanvasDpr, isMobileViewport, scaleParticleCount } from '../lib/performance'
+import { getCanvasDpr, getCanvasTargetFps, isMobileViewport, scaleParticleCount } from '../lib/performance'
 import type { AnimationId } from '../types/note'
 import blossom1 from '../../assets/cblossom-1.svg'
 import blossom2 from '../../assets/cblossom-2.svg'
@@ -531,11 +531,22 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       }
     }
 
-    const tick = () => {
+    const frameInterval = 1000 / getCanvasTargetFps()
+    let lastDrawTime = 0
+
+    const tick = (now: number) => {
       if (!shouldRun()) {
         frameRef.current = 0
         return
       }
+
+      if (lastDrawTime > 0 && now - lastDrawTime < frameInterval) {
+        frameRef.current = requestAnimationFrame(tick)
+        return
+      }
+
+      const delta = lastDrawTime > 0 ? Math.min(2.5, (now - lastDrawTime) / (1000 / 60)) : 1
+      lastDrawTime = now
 
       const w = canvas.width / dpr
       const h = canvas.height / dpr
@@ -544,7 +555,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       if (animationId === 'rainbow-confetti') {
         const confetti = confettiStateRef.current
         confetti.scheduled = confetti.scheduled.filter((pop) => {
-          pop.framesUntil -= 1
+          pop.framesUntil -= delta
           if (pop.framesUntil > 0) return true
           spawnConfettiBurst(particlesRef.current, w, h, pop.origin)
           return false
@@ -554,12 +565,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
         }
 
         particlesRef.current = particlesRef.current.filter((p) => {
-          p.life = (p.life ?? 0) + 1
-          p.vy += p.gravity ?? 0.12
-          p.vx *= 0.992
-          p.x += p.vx
-          p.y += p.vy
-          p.rotation += p.vr
+          p.life = (p.life ?? 0) + delta
+          p.vy += (p.gravity ?? 0.12) * delta
+          p.vx *= 0.992 ** delta
+          p.x += p.vx * delta
+          p.y += p.vy * delta
+          p.rotation += p.vr * delta
           const maxLife = p.maxLife ?? 120
           p.opacity = Math.max(0, 1 - (p.life / maxLife) ** 1.4)
 
@@ -572,7 +583,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       } else {
         particlesRef.current.forEach((p) => {
         if (animationId === 'ducks') {
-          p.life = (p.life ?? 0) + (p.pathSpeed ?? 0.012)
+          p.life = (p.life ?? 0) + (p.pathSpeed ?? 0.012) * delta
           const t = p.life + (p.pathOffset ?? 0)
           const waveFreqY = p.waveFreqY ?? 0.55
           const waveAmpY = p.waveAmpY ?? 8
@@ -580,7 +591,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
           const waveAmpX = p.waveAmpX ?? 0.1
 
           const meanderX = Math.sin(t * waveFreqX) * waveAmpX
-          p.x += (p.vx ?? 0) + meanderX
+          p.x += ((p.vx ?? 0) + meanderX) * delta
           p.y =
             (p.baseY ?? p.y) +
             Math.sin(t * waveFreqY) * waveAmpY +
@@ -595,12 +606,12 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
             p.x = dir > 0 ? -margin : w + margin
           }
         } else {
-          p.x += p.vx
-          p.y += p.vy
-          p.rotation += p.vr
+          p.x += p.vx * delta
+          p.y += p.vy * delta
+          p.rotation += p.vr * delta
 
           if (animationId === 'fireflies') {
-            p.life = (p.life ?? 0) + 1
+            p.life = (p.life ?? 0) + delta
             p.opacity = 0.15 + Math.abs(Math.sin(p.life * 0.05)) * 0.75
           }
           if (animationId === 'sparkles') {
