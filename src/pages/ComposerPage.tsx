@@ -128,6 +128,7 @@ export function ComposerPage() {
 
       <header className="composer__header">
         <div className="composer__logo-wrap">
+          <span className="composer__logo-sparkles" aria-hidden="true" />
           <span className="composer__logo-halo" aria-hidden="true" />
           <h1 className="composer__logo">Cute Notes</h1>
         </div>

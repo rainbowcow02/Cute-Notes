@@ -49,26 +49,30 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle 3px at 12% 10%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
-    radial-gradient(circle 12px at 12% 10%, rgba(255, 220, 250, 0.42) 0%, transparent 72%),
-    radial-gradient(circle 3px at 28% 7%, rgba(255, 248, 252, 0.9) 0%, transparent 68%),
-    radial-gradient(circle 13px at 28% 7%, rgba(255, 200, 230, 0.38) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 44% 12%, rgba(255, 255, 255, 0.85) 0%, transparent 65%),
-    radial-gradient(circle 11px at 44% 12%, rgba(220, 210, 255, 0.35) 0%, transparent 70%),
-    radial-gradient(circle 3.5px at 58% 8%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
-    radial-gradient(circle 14px at 58% 8%, rgba(240, 210, 255, 0.4) 0%, transparent 72%),
-    radial-gradient(circle 3px at 72% 11%, rgba(255, 255, 255, 0.88) 0%, transparent 68%),
-    radial-gradient(circle 12px at 72% 11%, rgba(255, 220, 245, 0.38) 0%, transparent 72%),
-    radial-gradient(circle 3px at 86% 9%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
-    radial-gradient(circle 13px at 86% 9%, rgba(255, 200, 230, 0.36) 0%, transparent 72%),
-    radial-gradient(circle 4px at 50% 5%, rgba(255, 255, 255, 0.95) 0%, transparent 70%),
-    radial-gradient(circle 15px at 50% 5%, rgba(255, 210, 250, 0.45) 0%, transparent 70%),
-    radial-gradient(circle 2.5px at 18% 42%, rgba(255, 255, 255, 0.75) 0%, transparent 65%),
-    radial-gradient(circle 10px at 18% 42%, rgba(255, 220, 245, 0.28) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 62% 40%, rgba(255, 255, 255, 0.7) 0%, transparent 65%),
-    radial-gradient(circle 10px at 62% 40%, rgba(230, 210, 255, 0.25) 0%, transparent 72%);
-  opacity: 0.88;
-  animation: dream-stars-twinkle 7s ease-in-out infinite alternate;
+    radial-gradient(circle 5px at 12% 10%, rgba(255, 255, 255, 0.98) 0%, transparent 68%),
+    radial-gradient(circle 20px at 12% 10%, rgba(255, 255, 255, 0.42) 0%, transparent 72%),
+    radial-gradient(circle 5px at 28% 7%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
+    radial-gradient(circle 22px at 28% 7%, rgba(255, 252, 255, 0.38) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 44% 12%, rgba(255, 255, 255, 0.92) 0%, transparent 65%),
+    radial-gradient(circle 18px at 44% 12%, rgba(252, 250, 255, 0.36) 0%, transparent 70%),
+    radial-gradient(circle 6px at 58% 8%, rgba(255, 255, 255, 0.96) 0%, transparent 68%),
+    radial-gradient(circle 24px at 58% 8%, rgba(255, 252, 255, 0.4) 0%, transparent 72%),
+    radial-gradient(circle 5px at 72% 11%, rgba(255, 255, 255, 0.94) 0%, transparent 68%),
+    radial-gradient(circle 20px at 72% 11%, rgba(255, 255, 255, 0.38) 0%, transparent 72%),
+    radial-gradient(circle 5px at 86% 9%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
+    radial-gradient(circle 22px at 86% 9%, rgba(255, 252, 255, 0.36) 0%, transparent 72%),
+    radial-gradient(circle 6.5px at 50% 5%, rgba(255, 255, 255, 0.98) 0%, transparent 70%),
+    radial-gradient(circle 26px at 50% 5%, rgba(255, 255, 255, 0.45) 0%, transparent 70%),
+    radial-gradient(circle 5px at 38% 4%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
+    radial-gradient(circle 18px at 38% 4%, rgba(255, 252, 255, 0.34) 0%, transparent 72%),
+    radial-gradient(circle 5px at 62% 4%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
+    radial-gradient(circle 18px at 62% 4%, rgba(252, 250, 255, 0.32) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 18% 42%, rgba(255, 255, 255, 0.82) 0%, transparent 65%),
+    radial-gradient(circle 17px at 18% 42%, rgba(255, 255, 255, 0.3) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 62% 40%, rgba(255, 255, 255, 0.78) 0%, transparent 65%),
+    radial-gradient(circle 17px at 62% 40%, rgba(255, 252, 255, 0.28) 0%, transparent 72%);
+  opacity: 0.95;
+  animation: dream-stars-twinkle 5.5s ease-in-out infinite alternate;
 }
 
 .composer__clouds {
@@ -278,29 +282,29 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle 2.5px at 22% 9%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
-    radial-gradient(ellipse 1px 10px at 22% 9%, rgba(255, 255, 255, 0.65) 0%, transparent 72%),
-    radial-gradient(ellipse 10px 1px at 22% 9%, rgba(255, 255, 255, 0.65) 0%, transparent 72%),
-    radial-gradient(circle 12px at 22% 9%, rgba(255, 210, 240, 0.32) 0%, transparent 72%),
-    radial-gradient(circle 3px at 48% 6%, rgba(255, 255, 255, 0.88) 0%, transparent 68%),
-    radial-gradient(ellipse 1px 11px at 48% 6%, rgba(255, 240, 210, 0.55) 0%, transparent 72%),
-    radial-gradient(ellipse 11px 1px at 48% 6%, rgba(255, 240, 210, 0.55) 0%, transparent 72%),
-    radial-gradient(circle 13px at 48% 6%, rgba(255, 220, 190, 0.28) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 74% 11%, rgba(255, 255, 255, 0.85) 0%, transparent 68%),
-    radial-gradient(ellipse 1px 9px at 74% 11%, rgba(255, 255, 255, 0.6) 0%, transparent 72%),
-    radial-gradient(ellipse 9px 1px at 74% 11%, rgba(255, 255, 255, 0.6) 0%, transparent 72%),
-    radial-gradient(circle 11px at 74% 11%, rgba(230, 210, 255, 0.3) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 18% 62%, rgba(255, 255, 255, 0.75) 0%, transparent 68%),
-    radial-gradient(circle 10px at 18% 62%, rgba(255, 210, 240, 0.28) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 62% 58%, rgba(255, 255, 255, 0.7) 0%, transparent 68%),
-    radial-gradient(circle 10px at 62% 58%, rgba(255, 200, 230, 0.25) 0%, transparent 72%),
-    radial-gradient(circle 3px at 88% 50%, rgba(255, 255, 255, 0.75) 0%, transparent 68%),
-    radial-gradient(circle 11px at 88% 50%, rgba(230, 210, 255, 0.28) 0%, transparent 72%),
-    radial-gradient(circle 2.5px at 32% 74%, rgba(255, 255, 255, 0.65) 0%, transparent 68%),
-    radial-gradient(circle 3px at 48% 65%, rgba(255, 255, 255, 0.75) 0%, transparent 70%),
-    radial-gradient(circle 10px at 48% 65%, rgba(255, 220, 245, 0.25) 0%, transparent 72%);
-  animation: dream-glitter 6s ease-in-out infinite;
-  opacity: 0.78;
+    radial-gradient(circle 4.5px at 22% 9%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
+    radial-gradient(ellipse 1.5px 17px at 22% 9%, rgba(255, 255, 255, 0.75) 0%, transparent 72%),
+    radial-gradient(ellipse 17px 1.5px at 22% 9%, rgba(255, 255, 255, 0.75) 0%, transparent 72%),
+    radial-gradient(circle 20px at 22% 9%, rgba(255, 255, 255, 0.36) 0%, transparent 72%),
+    radial-gradient(circle 5px at 48% 6%, rgba(255, 255, 255, 0.94) 0%, transparent 68%),
+    radial-gradient(ellipse 1.5px 18px at 48% 6%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(ellipse 18px 1.5px at 48% 6%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(circle 22px at 48% 6%, rgba(255, 252, 255, 0.32) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 74% 11%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
+    radial-gradient(ellipse 1.5px 15px at 74% 11%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(ellipse 15px 1.5px at 74% 11%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(circle 18px at 74% 11%, rgba(252, 250, 255, 0.34) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 18% 62%, rgba(255, 255, 255, 0.82) 0%, transparent 68%),
+    radial-gradient(circle 17px at 18% 62%, rgba(255, 255, 255, 0.3) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 62% 58%, rgba(255, 255, 255, 0.78) 0%, transparent 68%),
+    radial-gradient(circle 17px at 62% 58%, rgba(255, 252, 255, 0.28) 0%, transparent 72%),
+    radial-gradient(circle 5px at 88% 50%, rgba(255, 255, 255, 0.82) 0%, transparent 68%),
+    radial-gradient(circle 18px at 88% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 32% 74%, rgba(255, 255, 255, 0.72) 0%, transparent 68%),
+    radial-gradient(circle 5px at 48% 65%, rgba(255, 255, 255, 0.82) 0%, transparent 70%),
+    radial-gradient(circle 17px at 48% 65%, rgba(255, 252, 255, 0.28) 0%, transparent 72%);
+  animation: dream-glitter 4.5s ease-in-out infinite;
+  opacity: 0.88;
 }
 
 .composer__header,
@@ -312,7 +316,7 @@
 
 .composer__header {
   text-align: center;
-  padding: 2.75rem 1.5rem 1.25rem;
+  padding: 3.5rem 1.5rem 1.25rem;
   isolation: isolate;
 }
 
@@ -323,24 +327,56 @@
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle 3px at 18% 28%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
-    radial-gradient(circle 14px at 18% 28%, rgba(255, 210, 240, 0.38) 0%, transparent 72%),
-    radial-gradient(circle 3px at 82% 32%, rgba(255, 255, 255, 0.85) 0%, transparent 68%),
-    radial-gradient(circle 13px at 82% 32%, rgba(220, 210, 255, 0.35) 0%, transparent 72%),
-    radial-gradient(circle 3.5px at 50% 18%, rgba(255, 255, 255, 0.92) 0%, transparent 70%),
-    radial-gradient(circle 15px at 50% 18%, rgba(255, 220, 200, 0.32) 0%, transparent 72%),
-    radial-gradient(ellipse 1px 12px at 34% 42%, rgba(255, 255, 255, 0.6) 0%, transparent 72%),
-    radial-gradient(ellipse 12px 1px at 34% 42%, rgba(255, 255, 255, 0.6) 0%, transparent 72%),
-    radial-gradient(ellipse 1px 11px at 66% 38%, rgba(255, 240, 220, 0.5) 0%, transparent 72%),
-    radial-gradient(ellipse 11px 1px at 66% 38%, rgba(255, 240, 220, 0.5) 0%, transparent 72%);
-  animation: dream-glitter 6s ease-in-out infinite;
-  opacity: 0.82;
+    radial-gradient(circle 5px at 18% 22%, rgba(255, 255, 255, 0.95) 0%, transparent 68%),
+    radial-gradient(circle 22px at 18% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 72%),
+    radial-gradient(circle 5px at 82% 26%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
+    radial-gradient(circle 20px at 82% 26%, rgba(252, 250, 255, 0.36) 0%, transparent 72%),
+    radial-gradient(circle 6px at 50% 12%, rgba(255, 255, 255, 0.96) 0%, transparent 70%),
+    radial-gradient(circle 24px at 50% 12%, rgba(255, 255, 255, 0.4) 0%, transparent 72%),
+    radial-gradient(ellipse 1.5px 18px at 34% 36%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(ellipse 18px 1.5px at 34% 36%, rgba(255, 255, 255, 0.72) 0%, transparent 72%),
+    radial-gradient(ellipse 1.5px 17px at 66% 32%, rgba(255, 255, 255, 0.68) 0%, transparent 72%),
+    radial-gradient(ellipse 17px 1.5px at 66% 32%, rgba(255, 255, 255, 0.68) 0%, transparent 72%);
+  animation: dream-glitter 4.5s ease-in-out infinite;
+  opacity: 0.92;
 }
 
 .composer__logo-wrap {
   position: relative;
   display: inline-block;
   z-index: 1;
+}
+
+.composer__logo-sparkles {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.15rem);
+  transform: translateX(-50%);
+  width: min(320px, 92vw);
+  height: 4.5rem;
+  pointer-events: none;
+  z-index: 2;
+  background-image:
+    radial-gradient(circle 6px at 50% 72%, rgba(255, 255, 255, 0.98) 0%, transparent 68%),
+    radial-gradient(ellipse 2px 22px at 50% 72%, rgba(255, 255, 255, 0.82) 0%, transparent 72%),
+    radial-gradient(ellipse 22px 2px at 50% 72%, rgba(255, 255, 255, 0.82) 0%, transparent 72%),
+    radial-gradient(circle 28px at 50% 72%, rgba(255, 255, 255, 0.45) 0%, transparent 72%),
+    radial-gradient(circle 5px at 28% 58%, rgba(255, 255, 255, 0.94) 0%, transparent 68%),
+    radial-gradient(circle 20px at 28% 58%, rgba(255, 252, 255, 0.38) 0%, transparent 72%),
+    radial-gradient(circle 5px at 72% 62%, rgba(255, 255, 255, 0.92) 0%, transparent 68%),
+    radial-gradient(circle 20px at 72% 62%, rgba(252, 250, 255, 0.36) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 14% 38%, rgba(255, 255, 255, 0.88) 0%, transparent 68%),
+    radial-gradient(circle 18px at 14% 38%, rgba(255, 255, 255, 0.32) 0%, transparent 72%),
+    radial-gradient(circle 4.5px at 86% 42%, rgba(255, 255, 255, 0.86) 0%, transparent 68%),
+    radial-gradient(circle 18px at 86% 42%, rgba(255, 252, 255, 0.3) 0%, transparent 72%),
+    radial-gradient(circle 5px at 38% 22%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
+    radial-gradient(ellipse 1.5px 16px at 38% 22%, rgba(255, 255, 255, 0.68) 0%, transparent 72%),
+    radial-gradient(ellipse 16px 1.5px at 38% 22%, rgba(255, 255, 255, 0.68) 0%, transparent 72%),
+    radial-gradient(circle 5px at 62% 18%, rgba(255, 255, 255, 0.9) 0%, transparent 68%),
+    radial-gradient(ellipse 1.5px 16px at 62% 18%, rgba(255, 255, 255, 0.7) 0%, transparent 72%),
+    radial-gradient(ellipse 16px 1.5px at 62% 18%, rgba(255, 255, 255, 0.7) 0%, transparent 72%);
+  animation: dream-logo-sparkle 4s ease-in-out infinite;
+  opacity: 0.95;
 }
 
 .composer__logo-halo {
@@ -1315,10 +1351,12 @@
 @keyframes dream-stars-twinkle {
   0%,
   100% {
-    opacity: 0.72;
+    opacity: 0.8;
+    filter: brightness(1);
   }
   50% {
-    opacity: 0.95;
+    opacity: 1;
+    filter: brightness(1.2);
   }
 }
 
@@ -1370,10 +1408,26 @@
 @keyframes dream-glitter {
   0%,
   100% {
-    opacity: 0.62;
+    opacity: 0.76;
+    filter: brightness(1);
   }
   50% {
-    opacity: 0.88;
+    opacity: 1;
+    filter: brightness(1.22);
+  }
+}
+
+@keyframes dream-logo-sparkle {
+  0%,
+  100% {
+    opacity: 0.78;
+    filter: brightness(1);
+    transform: translateX(-50%) scale(0.97);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.18);
+    transform: translateX(-50%) scale(1.04);
   }
 }
 
