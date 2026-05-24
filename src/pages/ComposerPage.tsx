@@ -140,7 +140,7 @@ export function ComposerPage() {
         {/* Step 1: Card style */}
         <section className="composer__section composer__section--styles">
           <h2 className="composer__section-title">
-            <span className="composer__step">1</span> Stationery constellation
+            <span className="composer__step">1</span> Pick stationery
           </h2>
           <div className="style-picker" role="listbox" aria-label="Card styles">
             {CARD_STYLES.map((s) => (
@@ -173,7 +173,7 @@ export function ComposerPage() {
         {/* Step 2: Animation */}
         <section className="composer__section composer__section--animations">
           <h2 className="composer__section-title">
-            <span className="composer__step">2</span> Sky shimmer
+            <span className="composer__step">2</span> Add effect
           </h2>
           <div className="animation-picker" role="listbox" aria-label="Animation effects">
             {ANIMATIONS.map((a) => (
@@ -196,7 +196,7 @@ export function ComposerPage() {
         <aside className="composer__preview-column" aria-label="Live preview">
           <h2 className="composer__section-title composer__section-title--preview">
             <span className="composer__step composer__step--preview" aria-hidden="true">✦</span>
-            Floating above the clouds
+            What&apos;s on your mind?
           </h2>
           <div className="composer__card-float">
             <div className="composer__card-wrap">
@@ -314,7 +314,7 @@ export function ComposerPage() {
           onClick={() => setPreviewing(true)}
           disabled={!canSend}
         >
-          Peek at the sky
+          Preview
         </button>
         <button
           type="button"
@@ -322,7 +322,7 @@ export function ComposerPage() {
           onClick={send}
           disabled={!canSend}
         >
-          Release into the stars
+          Send note
         </button>
       </footer>
 
@@ -336,7 +336,7 @@ export function ComposerPage() {
                 Back
               </button>
               <button type="button" className="composer__btn composer__btn--primary" onClick={send}>
-                Release into the stars
+                Send note
               </button>
             </div>
           </div>
