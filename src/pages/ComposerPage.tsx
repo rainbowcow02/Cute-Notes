@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { AnimationId, CardStyleId, NoteData } from '../types/note'
-import { EMPTY_NOTE } from '../types/note'
 import { CARD_STYLES, getCardStyle } from '../data/cardStyles'
 import { ANIMATIONS } from '../data/animations'
 import { NoteCard } from '../components/NoteCard'
@@ -11,6 +10,16 @@ import { formatSalutation, formatValediction, stripSalutationPunctuation, stripV
 import './ComposerPage.css'
 
 const BODY_MAX = 150
+
+/** Dreamcore exploration demo — Sakura Cloud + cherry blossoms */
+const EXPLORATION_DEMO: NoteData = {
+  styleId: 'sakura-cloud',
+  animationId: 'cherry-blossoms',
+  salutation: 'dear my little duck prince',
+  body:
+    'Drifting through a soft pink sky tonight, thinking of you — hope this note lands like a cherry blossom, all gentle and impossibly bright. ✨',
+  valediction: 'your little ketchup packet',
+}
 
 function DecoratedSalutationInput({
   value,
@@ -63,7 +72,7 @@ function DecoratedValedictionInput({
 }
 
 export function ComposerPage() {
-  const [note, setNote] = useState<NoteData>(EMPTY_NOTE)
+  const [note, setNote] = useState<NoteData>(EXPLORATION_DEMO)
   const [previewing, setPreviewing] = useState(false)
   const [shareUrl, setShareUrl] = useState<string | null>(null)
 
@@ -96,17 +105,43 @@ export function ComposerPage() {
 
   return (
     <div className="composer">
+      <div className="composer__ambient" aria-hidden="true">
+        <div className="composer__stars" />
+        <div className="composer__clouds composer__clouds--sky" />
+        <div className="composer__cloud-field">
+          <span className="composer__cloud-puff composer__cloud-puff--1" />
+          <span className="composer__cloud-puff composer__cloud-puff--2" />
+          <span className="composer__cloud-puff composer__cloud-puff--3" />
+          <span className="composer__cloud-puff composer__cloud-puff--4" />
+          <span className="composer__cloud-puff composer__cloud-puff--5" />
+          <span className="composer__cloud-puff composer__cloud-puff--6" />
+          <span className="composer__cloud-puff composer__cloud-puff--7" />
+          <span className="composer__cloud-puff composer__cloud-puff--8" />
+          <span className="composer__cloud-puff composer__cloud-puff--9" />
+          <span className="composer__cloud-puff composer__cloud-puff--10" />
+          <span className="composer__cloud-puff composer__cloud-puff--11" />
+          <span className="composer__cloud-puff composer__cloud-puff--12" />
+          <span className="composer__cloud-puff composer__cloud-puff--13" />
+          <span className="composer__cloud-puff composer__cloud-puff--14" />
+        </div>
+        <div className="composer__clouds composer__clouds--horizon" />
+        <div className="composer__glitter" />
+      </div>
+
       <header className="composer__header">
-        <h1 className="composer__logo">Cute Notes</h1>
-        <p className="composer__tagline">Write a note. Pick a vibe. Send a moment.</p>
+        <div className="composer__logo-wrap">
+          <span className="composer__logo-halo" aria-hidden="true" />
+          <h1 className="composer__logo">Cute Notes</h1>
+        </div>
+        <p className="composer__tagline">Float a wish into someone&apos;s sky</p>
       </header>
 
       <main className="composer__main">
         <div className="composer__steps">
         {/* Step 1: Card style */}
-        <section className="composer__section">
+        <section className="composer__section composer__section--styles">
           <h2 className="composer__section-title">
-            <span className="composer__step">1</span> Pick your stationery
+            <span className="composer__step">1</span> Stationery constellation
           </h2>
           <div className="style-picker" role="listbox" aria-label="Card styles">
             {CARD_STYLES.map((s) => (
@@ -133,9 +168,9 @@ export function ComposerPage() {
         </section>
 
         {/* Step 2: Animation */}
-        <section className="composer__section">
+        <section className="composer__section composer__section--animations">
           <h2 className="composer__section-title">
-            <span className="composer__step">2</span> Pick a vibe
+            <span className="composer__step">2</span> Sky shimmer
           </h2>
           <div className="animation-picker" role="listbox" aria-label="Animation effects">
             {ANIMATIONS.map((a) => (
@@ -156,8 +191,13 @@ export function ComposerPage() {
         </div>
 
         <aside className="composer__preview-column" aria-label="Live preview">
-          <h2 className="composer__section-title">Live preview</h2>
-          <div className="composer__card-wrap">
+          <h2 className="composer__section-title composer__section-title--preview">
+            <span className="composer__step composer__step--preview" aria-hidden="true">✦</span>
+            Floating above the clouds
+          </h2>
+          <div className="composer__card-float">
+            <div className="composer__card-chrome" aria-hidden="true" />
+            <div className="composer__card-wrap">
             <div
               className={`stationery-pad note-card--${style.id} note-card--border-${style.border.style}`}
               style={
@@ -261,6 +301,7 @@ export function ComposerPage() {
               </div>
             </div>
           </div>
+          </div>
         </aside>
       </main>
 
@@ -271,7 +312,7 @@ export function ComposerPage() {
           onClick={() => setPreviewing(true)}
           disabled={!canSend}
         >
-          Preview
+          Peek at the sky
         </button>
         <button
           type="button"
@@ -279,21 +320,21 @@ export function ComposerPage() {
           onClick={send}
           disabled={!canSend}
         >
-          Send moment
+          Release into the stars
         </button>
       </footer>
 
       {previewing && (
         <div className="preview-overlay" role="dialog" aria-modal="true" aria-label="Preview">
           <div className="preview-overlay__inner">
-            <p className="preview-overlay__label">This is what they'll see</p>
+            <p className="preview-overlay__label">A glimpse through the star haze</p>
             <NoteCard note={note} showParticles />
             <div className="preview-overlay__actions">
               <button type="button" className="composer__btn composer__btn--secondary" onClick={() => setPreviewing(false)}>
                 Back
               </button>
               <button type="button" className="composer__btn composer__btn--primary" onClick={send}>
-                Send moment
+                Release into the stars
               </button>
             </div>
           </div>

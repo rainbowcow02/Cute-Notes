@@ -26,20 +26,20 @@ export function ShareModal({ url, onClose }: ShareModalProps) {
           ×
         </button>
         <h2 id="share-title" className="share-modal__title">
-          Your note is ready 💌
+          Your wish is drifting ✨
         </h2>
         <p className="share-modal__subtitle">
-          Anyone can open this link — no account needed
+          Share this link — no account, just starlight
         </p>
         <div className="share-modal__url-row">
           <input className="share-modal__url" readOnly value={url} onFocus={(e) => e.target.select()} />
           <button type="button" className="share-modal__copy" onClick={copy}>
-            {copied ? 'Copied!' : 'Copy'}
+            {copied ? 'Copied!' : 'Copy link'}
           </button>
         </div>
-        <p className="share-modal__hint">Send via iMessage, DMs, or anywhere you like</p>
+        <p className="share-modal__hint">Send via text, DMs, or anywhere the sky reaches</p>
         <button type="button" className="share-modal__done" onClick={onClose}>
-          Done
+          Back to the clouds
         </button>
       </div>
     </div>
