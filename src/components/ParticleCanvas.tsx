@@ -1,5 +1,38 @@
 import { useEffect, useRef } from 'react'
 import type { AnimationId } from '../types/note'
+import blossom1 from '../../assets/cblossom-1.svg'
+import blossom2 from '../../assets/cblossom-2.svg'
+import blossom3 from '../../assets/cblossom-3.svg'
+import starSvg from '../../assets/star.svg'
+
+const BLOSSOM_SRCS = [blossom1, blossom2, blossom3]
+const blossomImages: (HTMLImageElement | null)[] = [null, null, null]
+let starImage: HTMLImageElement | null = null
+
+function loadImage(src: string, onLoad: (img: HTMLImageElement) => void) {
+  const img = new Image()
+  img.src = src
+  img.onload = () => onLoad(img)
+}
+
+function loadBlossomImages() {
+  BLOSSOM_SRCS.forEach((src, i) => {
+    if (blossomImages[i]) return
+    loadImage(src, (img) => {
+      blossomImages[i] = img
+    })
+  })
+}
+
+function loadStarImage() {
+  if (starImage) return
+  loadImage(starSvg, (img) => {
+    starImage = img
+  })
+}
+
+loadBlossomImages()
+loadStarImage()
 
 interface Particle {
   x: number
@@ -11,6 +44,7 @@ interface Particle {
   rotation: number
   vr: number
   hue?: number
+  sprite?: number
   shape: 'circle' | 'star' | 'petal' | 'leaf' | 'rect'
   life?: number
 }
@@ -22,6 +56,14 @@ interface ParticleCanvasProps {
 }
 
 const COUNT = 48
+const STAR_COUNT = 10
+const CHERRY_BLOSSOM_COUNT = 12
+
+function getParticleCount(id: AnimationId): number {
+  if (id === 'stars') return STAR_COUNT
+  if (id === 'cherry-blossoms') return CHERRY_BLOSSOM_COUNT
+  return COUNT
+}
 
 function randomBetween(min: number, max: number) {
   return min + Math.random() * (max - min)
@@ -43,10 +85,32 @@ function createParticle(w: number, h: number, id: AnimationId): Particle {
   switch (id) {
     case 'snow':
       return { ...base, vy: randomBetween(0.3, 1.2), vx: randomBetween(-0.3, 0.3), size: randomBetween(2, 5), opacity: randomBetween(0.5, 0.95) }
-    case 'stars':
-      return { ...base, shape: 'star', vy: randomBetween(0.15, 0.5), size: randomBetween(2, 4), opacity: randomBetween(0.2, 1) }
+    case 'stars': {
+      const vy = randomBetween(0.5, 2.0)
+      const vx = randomBetween(-1.1, 1.1)
+      return {
+        ...base,
+        x: randomBetween(-w * 0.1, w * 1.1),
+        y: randomBetween(-h * 0.4, -10),
+        shape: 'star',
+        vx,
+        vy,
+        size: randomBetween(12, 32),
+        opacity: randomBetween(0.55, 1),
+        rotation: Math.atan2(vy, vx) + Math.PI / 2,
+        vr: randomBetween(-0.008, 0.008),
+      }
+    }
     case 'cherry-blossoms':
-      return { ...base, shape: 'petal', vy: randomBetween(0.4, 1), vx: randomBetween(-0.8, 0.8), size: randomBetween(6, 12), hue: randomBetween(330, 360) }
+      return {
+        ...base,
+        shape: 'petal',
+        sprite: Math.floor(Math.random() * BLOSSOM_SRCS.length),
+        vy: randomBetween(0.4, 1),
+        vx: randomBetween(-0.8, 0.8),
+        size: randomBetween(14, 24),
+        vr: randomBetween(-0.04, 0.04),
+      }
     case 'rainbow-confetti':
       return { ...base, shape: 'rect', vy: randomBetween(1, 3), vx: randomBetween(-1.5, 1.5), size: randomBetween(4, 8), hue: randomBetween(0, 360), vr: randomBetween(-0.15, 0.15) }
     case 'fireflies':
@@ -68,10 +132,29 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: Particle, id: AnimationI
   ctx.rotate(p.rotation)
   ctx.globalAlpha = p.opacity
 
+  if (id === 'cherry-blossoms') {
+    const img = blossomImages[p.sprite ?? 0]
+    if (img) {
+      const aspect = img.naturalHeight / img.naturalWidth
+      const w = p.size
+      const h = p.size * aspect
+      ctx.drawImage(img, -w / 2, -h / 2, w, h)
+      ctx.restore()
+      return
+    }
+  }
+
+  if (id === 'stars' && starImage) {
+    const aspect = starImage.naturalHeight / starImage.naturalWidth
+    const w = p.size
+    const h = p.size * aspect
+    ctx.drawImage(starImage, -w / 2, -h / 2, w, h)
+    ctx.restore()
+    return
+  }
+
   if (id === 'rainbow-confetti' && p.hue !== undefined) {
     ctx.fillStyle = `hsl(${p.hue}, 85%, 60%)`
-  } else if (id === 'cherry-blossoms' && p.hue !== undefined) {
-    ctx.fillStyle = `hsl(${p.hue}, 70%, 85%)`
   } else if (id === 'leaves' && p.hue !== undefined) {
     ctx.fillStyle = `hsl(${p.hue}, 45%, 45%)`
   } else if (id === 'bubbles') {
@@ -143,7 +226,7 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      particlesRef.current = Array.from({ length: COUNT }, () =>
+      particlesRef.current = Array.from({ length: getParticleCount(animationId) }, () =>
         createParticle(width, height, animationId),
       )
     }
@@ -176,7 +259,13 @@ export function ParticleCanvas({ animationId, active = true, className }: Partic
 
         if (p.y > h + 20 || p.y < -20 || p.x < -20 || p.x > w + 20) {
           Object.assign(p, createParticle(w, h, animationId))
-          p.y = animationId === 'bubbles' ? h + 10 : -10
+          if (animationId === 'bubbles') {
+            p.y = h + 10
+          } else if (animationId === 'stars') {
+            p.y = randomBetween(-h * 0.25, -10)
+          } else {
+            p.y = -10
+          }
         }
 
         drawParticle(ctx, p, animationId)
