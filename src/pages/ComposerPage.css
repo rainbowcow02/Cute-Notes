@@ -347,6 +347,14 @@
   .composer__header {
     padding-bottom: 4rem;
   }
+
+  .composer__main {
+    padding-top: 1.5rem;
+  }
+
+  .composer__steps {
+    gap: 1rem;
+  }
 }
 
 .composer__glitter {
@@ -506,7 +514,7 @@
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 1.25rem calc(4.9375rem + var(--composer-footer-gap));
+  padding: 36px 1.25rem calc(4.9375rem + var(--composer-footer-gap));
   display: grid;
   gap: 2.5rem;
   grid-template-columns: 1fr;
@@ -517,7 +525,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 24px;
 }
 
 .composer__steps .composer__section {
