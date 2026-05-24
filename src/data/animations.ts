@@ -14,7 +14,7 @@ export const ANIMATIONS: AnimationOption[] = [
   { id: 'fireflies', emoji: '🔥', label: 'Fireflies' },
   { id: 'leaves', emoji: '🍃', label: 'Leaves' },
   { id: 'sparkles', emoji: '💫', label: 'Sparkles' },
-  { id: 'bubbles', emoji: '🫧', label: 'Bubbles' },
+  { id: 'ducks', emoji: '🦆', label: 'Ducks' },
 ]
 
 export function getAnimation(id: AnimationId) {

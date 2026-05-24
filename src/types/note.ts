@@ -6,7 +6,7 @@ export type AnimationId =
   | 'fireflies'
   | 'leaves'
   | 'sparkles'
-  | 'bubbles'
+  | 'ducks'
 
 export type CardStyleId =
   | 'grid-garden'
