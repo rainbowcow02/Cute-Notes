@@ -196,7 +196,6 @@ export function ComposerPage() {
             Floating above the clouds
           </h2>
           <div className="composer__card-float">
-            <div className="composer__card-chrome" aria-hidden="true" />
             <div className="composer__card-wrap">
             <div
               className={`stationery-pad note-card--${style.id} note-card--border-${style.border.style}`}

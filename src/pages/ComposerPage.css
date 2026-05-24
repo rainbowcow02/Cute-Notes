@@ -391,28 +391,6 @@
   animation: dream-card-float 5s ease-in-out infinite;
 }
 
-.composer__card-chrome {
-  position: absolute;
-  inset: -14px -10px -22px;
-  border-radius: 28px;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.75) 0%,
-    rgba(240, 220, 255, 0.35) 30%,
-    rgba(255, 235, 248, 0.25) 50%,
-    rgba(220, 200, 245, 0.35) 70%,
-    rgba(255, 255, 255, 0.6) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow:
-    0 0 36px rgba(240, 180, 220, 0.28),
-    0 12px 40px rgba(180, 150, 210, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(220, 190, 240, 0.15);
-  pointer-events: none;
-  z-index: 0;
-}
-
 .composer__card-float .composer__card-wrap {
   position: relative;
   z-index: 1;
@@ -575,7 +553,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
+  gap: 6px;
   padding: 0.55rem 0.3rem;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 50% 50% 50% 12px / 50% 50% 12px 50%;
@@ -645,6 +623,7 @@
   min-height: 280px;
   height: 100%;
   padding: var(--card-frame-padding);
+  padding-top: 30px;
   border-radius: var(--card-frame-radius);
   box-sizing: border-box;
 }
