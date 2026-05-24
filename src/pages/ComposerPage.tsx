@@ -197,6 +197,7 @@ export function ComposerPage() {
           <h2 className="composer__section-title composer__section-title--preview">
             <span className="composer__step composer__step--preview" aria-hidden="true">✦</span>
             What&apos;s on your mind?
+            <span className="composer__step composer__step--preview" aria-hidden="true">✦</span>
           </h2>
           <div className="composer__card-float">
             <div className="composer__card-wrap">
