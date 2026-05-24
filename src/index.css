@@ -29,6 +29,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 a:focus-visible {
-  outline: 2px solid #d888a8;
+  outline: 2px solid #c4a8e0;
   outline-offset: 2px;
+  box-shadow: 0 0 10px rgba(240, 176, 216, 0.35);
 }

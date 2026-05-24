@@ -9,12 +9,12 @@ export interface AnimationOption {
 export const ANIMATIONS: AnimationOption[] = [
   { id: 'snow', emoji: '❄️', label: 'Snow' },
   { id: 'stars', emoji: '⭐', label: 'Stars' },
-  { id: 'cherry-blossoms', emoji: '🌸', label: 'Cherry blossoms' },
-  { id: 'rainbow-confetti', emoji: '🎊', label: 'Rainbow confetti' },
+  { id: 'cherry-blossoms', emoji: '🌸', label: 'Flowers' },
+  { id: 'rainbow-confetti', emoji: '🎊', label: 'Confetti' },
   { id: 'fireflies', emoji: '🔥', label: 'Fireflies' },
   { id: 'leaves', emoji: '🍃', label: 'Leaves' },
   { id: 'sparkles', emoji: '💫', label: 'Sparkles' },
-  { id: 'bubbles', emoji: '🫧', label: 'Bubbles' },
+  { id: 'ducks', emoji: '🦆', label: 'Ducks' },
 ]
 
 export function getAnimation(id: AnimationId) {
